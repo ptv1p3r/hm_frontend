@@ -160,9 +160,9 @@
                       <td><a href="#" class="text-primary"> Rua das carochas, n5</a></td>
                       <td><a href="#" class="date text-primary">Portimão</a></td>
                       <td><a href="#" class="date text-primary">961111222</a></td>
-                     <!--<td><a href="#"><i class="size-26" data-feather="edit"></i></a></td>
-                      <td><a href="#"><i class="size-26" data-feather="eye"></i></a></td>
-                      <td><a href="#"><i class="size-26" data-feather="x"></i></a>  -->
+                      <td><a href="#"><i class="size-26" data-feather="edit"></i></a>
+                          <a href="#"><i class="size-26" data-feather="eye"></i></a>
+                          <a href="#"><i class="size-26" data-feather="x"></i></a> </td>
                     </tr>
                     <tr>
                       <th scope="row"><a href="#">#101</a></th>
@@ -324,6 +324,50 @@
   <!-- Template Main JS File -->
   <script src="static/js/main.js"></script>
   <script src="static/js/user.js"></script>
+
+  <!-- data-feather icons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+
+  <script>
+    feather.replace()
+
+    var collapseElementList = [].slice.call(
+      document.querySelectorAll(".collapse")
+    );
+    var collapseList = collapseElementList.map(function (collapseEl) {
+      return new bootstrap.Collapse(collapseEl);
+    });
+
+    // Popovers
+    const popoverTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="popover"]')
+    );
+    popoverTriggerList.map((popoverTriggerEl) => {
+      return new bootstrap.Popover(popoverTriggerEl);
+    });
+
+    // Tooltips
+    const tooltipTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
+    tooltipTriggerList.map((tooltipTriggerEl) => {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    // initializeSidebarCollapse
+    const sidebarElement = document.getElementsByClassName("js-sidebar")[0];
+    const sidebarToggleElement = document.getElementsByClassName("js-sidebar-toggle")[0];
+
+    if (sidebarElement && sidebarToggleElement) {
+      sidebarToggleElement.addEventListener("click", () => {
+        sidebarElement.classList.toggle("collapsed");
+
+        sidebarElement.addEventListener("transitionend", () => {
+          window.dispatchEvent(new Event("resize"));
+        });
+      });
+    }
+  </script>
 
 </body>
 
