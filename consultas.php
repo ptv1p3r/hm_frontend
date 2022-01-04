@@ -117,9 +117,10 @@
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
+  <div class="row mb-2 mb-xl-3">
   <div class="col-auto d-none d-sm-block">
     <h1>Consultas</h1>
-  </div>
+  </div><!-- End Page Title -->
 
     <section class="section">
  
