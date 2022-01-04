@@ -80,7 +80,8 @@
                 <div class="row text-center clinica_row">
                     <div class="col-4">
                         <i class="size-32 align-middle" data-feather="phone"></i>
-                        <p>Emergency Cases: <br>
+                        <p>Marcação de consultas ou  <br>
+                            esclarecimento de dúvidas: <br> 
                             (052) 611-5711</p>
                     </div>
                     <div class="col-4">
@@ -93,7 +94,8 @@
                     <div class="col-4">
                         <div class="contact_through_inner">
                             <i class="size-32 align-middle" data-feather="mail"></i>
-                            <p>Email Address<br>
+                            <p>Esclarecimento de  <br>
+                             dúvidas via Email:<br>
                                 contact@meditex.com</p>
                         </div>
                     </div>
