@@ -39,10 +39,10 @@
   <header id="header" class="header fixed-top d-flex">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-            <img src="static/img/logo.png" alt="">
+        <div class="logo d-flex align-items-center">
+            <img src="static/img/logo.png" alt="Logo">
             <span class="d-none d-lg-block">Consultas LDA</span>
-        </a>
+        </div>
     </div><!-- End Logo -->
 
   </header><!-- End Header -->
@@ -50,7 +50,7 @@
   <main id="clinica_main">
   <div class="row">
   <div class="col-12 text-center d-none d-sm-block">
-    <h1>Contactos</h1>
+    <h1>Contactos e Informações</h1>
   </div><!-- End Page Title -->
 
     <section class="section">
