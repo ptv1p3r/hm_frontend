@@ -9,6 +9,21 @@
 #CUSTOM
 --------------------------------------------------------------*/
 
+/*clinica.php*/
+#clinica_main {
+  margin-top: 60px;
+  padding: 20px 30px;
+  transition: all 0.3s;
+}
+
+#clinica_footer {
+  padding: 20px 0;
+  font-size: 14px;
+  transition: all 0.3s;
+  border-top: 1px solid #cddfff;
+  text-align: center;
+}
+
 /*GOOGLE MAP*/
 .map-container-2{
   overflow:hidden;
@@ -16,6 +31,7 @@
   position:relative;
   height:0;
 }
+
 .map-container-2 iframe{
   left:0;
   top:0;
