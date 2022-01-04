@@ -20,21 +20,17 @@
   <!-- Vendor CSS Files -->
   <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="static/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="static/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="static/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="static/vendor/simple-datatables/style.css" rel="stylesheet">
+  
 
   <!-- Template Main CSS File -->
   <link href="static/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.2.0
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
+
+  <link href="static/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="static/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -71,7 +67,7 @@
             <img src="static/img/admin.jpg" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">Admin</span>
           </a><!-- End Profile Iamge Icon -->
-          
+
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>Admin</h6>
@@ -95,63 +91,191 @@
 
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
-
     <ul class="sidebar-nav" id="sidebar-nav">
-
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ url_for('index') }}">
+        <a class="nav-link " href="index.php">
           <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+          <span>Página principal</span>
         </a>
       </li><!-- End Dashboard Nav -->
-    
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ url_for('consultas') }}">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="consultas.php">
           <i class="bi bi-archive"></i>
           <span>Consultas</span>
         </a>
       </li><!-- End Consultas Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ url_for('clientes') }}">
+        <a class="nav-link collapsed" href="utentes.php">
           <i class="bi bi-person"></i>
-          <span>Clientes</span>
+          <span>Utentes</span>
         </a>
       </li><!-- End Clientes Page Nav -->
-
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('medicos') }}">
+        <a class="nav-link collapsed" href="medicos.php">
           <i class="bi bi-activity"></i>
-          <span>Medicos</span>
+          <span>Médicos</span>
         </a>
-      </li><!-- End Medicos Page Nav -->
+      </li><!-- End Médicos Page Nav -->
     </ul>
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
     <div class="pagetitle">
-      <h1>Medicos</h1>
+      <h1>Médicos</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
-          <li class="breadcrumb-item active">Medicos</li>
+          <li class="breadcrumb-item active">Médicos</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
     <section class="section">
-      <div class="row">
 
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Example Card</h5>
-              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+
+      <div class="container">
+        <p id="success"></p>
+        <div class="table-wrapper">
+          <div class="table-title">
+            <div class="row">
+              <div class="col-sm-6">
+                <h2>Médicos</h2>
+              </div>
+              <div class="col-sm-6">
+                <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-sm" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Medico</span></a>
+                <a href="JavaScript:void(0);" type="button" class="btn btn-secondary btn-sm" id="delete_multiple"><i class="material-icons"></i> <span>Eliminar</span></a>
+              </div>
             </div>
           </div>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>
+                  <span class="custom-checkbox">
+                    <input type="checkbox" id="selectAll">
+                    <label for="selectAll"></label>
+                  </span>
+                </th>
+                <th>Médico número</th>
+                <th>Nome</th>
+                <th>Morada</th>
+                <th>Cidade</th>
+                <th>Telemóvel</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
         </div>
-
       </div>
+
+
+
+      <!-- Add Modal HTML -->
+      <div id="addEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form id="user_form">
+              <div class="modal-header">
+                <h4 class="modal-title">Add User</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Nome</label>
+                  <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>EMAIL</label>
+                  <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>PHONE</label>
+                  <input type="phone" id="phone" name="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>CITY</label>
+                  <input type="city" id="city" name="city" class="form-control" required>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <input type="hidden" value="1" name="type">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <button type="button" class="btn btn-success" id="btn-add">Add</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Edit Modal HTML -->
+      <div id="editEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form id="update_form">
+              <div class="modal-header">
+                <h4 class="modal-title">Edit User</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" id="id_u" name="id" class="form-control" required>
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" id="name_u" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" id="email_u" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>PHONE</label>
+                  <input type="phone" id="phone_u" name="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>City</label>
+                  <input type="city" id="city_u" name="city" class="form-control" required>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <input type="hidden" value="2" name="type">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <button type="button" class="btn btn-info" id="update">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Delete Modal HTML -->
+      <div id="deleteEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form>
+
+              <div class="modal-header">
+                <h4 class="modal-title">Delete User</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" id="id_d" name="id" class="form-control">
+                <p>Are you sure you want to delete these Records?</p>
+                <p class="text-warning"><small>This action cannot be undone.</small></p>
+              </div>
+              <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <button type="button" class="btn btn-danger" id="delete">Delete</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
     </section>
 
   </main><!-- End #main -->
@@ -173,17 +297,17 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="static/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="static/vendor/chart.js/chart.min.js"></script>
-  <script src="static/vendor/echarts/echarts.min.js"></script>
-  <script src="static/vendor/quill/quill.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="static/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="static/vendor/tinymce/tinymce.min.js"></script>
-  <script src="static/vendor/php-email-form/validate.js"></script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  
   <!-- Template Main JS File -->
   <script src="static/js/main.js"></script>
+  <script src="static/js/user.js"></script>
 
 </body>
 

@@ -8,7 +8,7 @@
   <title>Consultas LDA</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
+  
   <!-- Favicons -->
   <link href="static/img/favicon.png" rel="icon">
   <link href="static/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -20,21 +20,17 @@
   <!-- Vendor CSS Files -->
   <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="static/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="static/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="static/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="static/vendor/simple-datatables/style.css" rel="stylesheet">
+  
 
   <!-- Template Main CSS File -->
   <link href="static/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.2.0
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
+
+  <link href="static/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="static/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -71,7 +67,7 @@
             <img src="static/img/admin.jpg" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">Admin</span>
           </a><!-- End Profile Iamge Icon -->
-          
+
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>Admin</h6>
@@ -95,32 +91,29 @@
 
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
-
     <ul class="sidebar-nav" id="sidebar-nav">
-
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link " href="index.php">
           <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+          <span>Página principal</span>
         </a>
       </li><!-- End Dashboard Nav -->
-    
       <li class="nav-item">
-        <a class="nav-link" href="consultas.html">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="consultas.php">
           <i class="bi bi-archive"></i>
           <span>Consultas</span>
         </a>
       </li><!-- End Consultas Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="clientes.html">
+        <a class="nav-link collapsed" href="utentes.php">
           <i class="bi bi-person"></i>
-          <span>Clientes</span>
+          <span>Utentes</span>
         </a>
       </li><!-- End Clientes Page Nav -->
-
       <li class="nav-item">
-        <a class="nav-link collapsed" href="medicos.html">
+        <a class="nav-link collapsed" href="medicos.php">
           <i class="bi bi-activity"></i>
           <span>Medicos</span>
         </a>
