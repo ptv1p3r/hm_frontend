@@ -20,7 +20,7 @@
   <!-- Vendor CSS Files -->
   <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  
+
 
   <!-- Template Main CSS File -->
   <link href="static/css/style.css" rel="stylesheet">
@@ -134,8 +134,55 @@
 
     <section class="section">
 
+      <div class="container">
+        <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-sm" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Utente</span></a>
+        <p id="success"></p>
+        <!-- Recent medical appointments -->
+        <div class="col-12">
+          <div class="card recent-sales">
+            <div class="card-body">
+              <h5 class="card-title">Utentes</h5>
+              <th>
+                <table class="table table-borderless datatable">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nº Utente</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Morada</th>
+                      <th scope="col">Cidade</th>
+                      <th scope="col">Telemóvel</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row"><a href="#">#100</a></th>
+                      <td><a href="#" class="text-primary">Denis Botnaru</a></td>
+                      <td><a href="#" class="text-primary"> Rua das carochas, n5</a></td>
+                      <td><a href="#" class="date text-primary">Portimão</a></td>
+                      <td><a href="#" class="date text-primary">961111222</a></td>
+
+                    </tr>
+                    <tr>
+                      <th scope="row"><a href="#">#101</a></th>
+                      <td><a href="#" class="text-primary">Joaquim Roscas</a></td>
+                      <td><a class="text-primary"> Rua das carochas, n5</a></td>
+                      <td><a class="text-primary">Portimão</a></td>
+                      <td><a class="text-primary">961111222</a></td>
+
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+        </div><!-- End Recent medical appointments -->
+      </div>
+      </div>
 
       <div class="container">
+
+
+
+
         <p id="success"></p>
         <div class="table-wrapper">
           <div class="table-title">
@@ -145,7 +192,6 @@
               </div>
               <div class="col-sm-6">
                 <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-sm" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Utente</span></a>
-                <a href="JavaScript:void(0);" type="button" class="btn btn-secondary btn-sm" id="delete_multiple"><i class="material-icons"></i> <span>Eliminar</span></a>
               </div>
             </div>
           </div>
@@ -304,7 +350,7 @@
   <script src="static/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="static/vendor/tinymce/tinymce.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  
+
   <!-- Template Main JS File -->
   <script src="static/js/main.js"></script>
   <script src="static/js/user.js"></script>
