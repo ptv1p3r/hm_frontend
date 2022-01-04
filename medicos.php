@@ -150,6 +150,7 @@
                       <th scope="col">Morada</th>
                       <th scope="col">Cidade</th>
                       <th scope="col">Telemóvel</th>
+                      <th scope="col">Opções</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -159,6 +160,9 @@
                       <td><a href="#" class="text-primary"> Rua das carochas, n5</a></td>
                       <td><a href="#" class="date text-primary">Portimão</a></td>
                       <td><a href="#" class="date text-primary">961111222</a></td>
+                      <!-- <td><a href="#"><i class="size-26" data-feather="edit"></i></a></td>
+                      <td><a href="#"><i class="size-26" data-feather="eye"></i></a></td>
+                      <td><a href="#"><i class="size-26" data-feather="x"></i></a>  -->
 
                     </tr>
                     <tr>
