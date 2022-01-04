@@ -122,22 +122,17 @@
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
-    <div class="pagetitle">
-      <h1>Médicos</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
-          <li class="breadcrumb-item active">Médicos</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+  <div class="row mb-2 mb-xl-3">
+  <div class="col-auto d-none d-sm-block">
+    <h1>Médicos</h1>
+  </div><!-- End Page Title -->
 
     <section class="section">
  
       <div class="container">
       <div class="row"> 
-      <div class="col-12 mb-4">
-          <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Utente</span></a>
+      <div class="col-12 mb-3">
+          <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Médico</span></a>
           <p id="success"></p>
             </div>
       </div>
@@ -145,8 +140,7 @@
         <div class="col-12">
           <div class="card recent-sales">
             <div class="card-body">
-
-              <h5 class="card-title">Utentes</h5>
+            <h5 class="card-title">Médicos no sistema</h5>
               <th>
                 <table class="table table-borderless datatable">
                   <thead>
@@ -198,7 +192,7 @@
           <div class="modal-content">
             <form id="user_form">
               <div class="modal-header">
-                <h4 class="modal-title">Add User</h4>
+                <h4 class="modal-title">Adicionar Médico</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               </div>
               <div class="modal-body">
@@ -221,8 +215,8 @@
               </div>
               <div class="modal-footer">
                 <input type="hidden" value="1" name="type">
-                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                <button type="button" class="btn btn-success" id="btn-add">Add</button>
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                <button type="button" class="btn btn-primary" id="btn-add">Adicionar</button>
               </div>
             </form>
           </div>

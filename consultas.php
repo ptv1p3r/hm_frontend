@@ -100,14 +100,14 @@
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
       <li class="nav-item">
-        <a class="nav-link collapsed" href="consultas.php">
+        <a class="nav-link" href="consultas.php">
           <i class="bi bi-archive"></i>
           <span>Consultas</span>
         </a>
       </li><!-- End Consultas Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link" href="utentes.php">
+        <a class="nav-link collapsed" href="utentes.php">
           <i class="bi bi-person"></i>
           <span>Utentes</span>
         </a>
@@ -122,31 +122,24 @@
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
-    <div class="pagetitle">
-      <h1>Consulta</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
-          <li class="breadcrumb-item active">Consulta</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+  <div class="col-auto d-none d-sm-block">
+    <h1>Consultas</h1>
+  </div>
 
     <section class="section">
  
       <div class="container">
-      <div class="row"> 
-      <div class="col-12 mb-4">
-          <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Utente</span></a>
-          <p id="success"></p>
-            </div>
-      </div>
+        <div class="row"> 
+        <div class="col-12 mb-3">
+            <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Criar Consulta</span></a>
+            <p id="success"></p>
+              </div>
+        </div>
         <!-- Recent medical appointments -->
         <div class="col-12">
           <div class="card recent-sales">
             <div class="card-body">
-
-              <h5 class="card-title">Utentes</h5>
+            <h5 class="card-title">Consultas criadas</h5>
               <th>
                 <table class="table table-borderless datatable">
                   <thead>
@@ -198,7 +191,7 @@
           <div class="modal-content">
             <form id="user_form">
               <div class="modal-header">
-                <h4 class="modal-title">Add User</h4>
+                <h4 class="modal-title">Criar Consulta</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               </div>
               <div class="modal-body">
@@ -221,8 +214,8 @@
               </div>
               <div class="modal-footer">
                 <input type="hidden" value="1" name="type">
-                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                <button type="button" class="btn btn-success" id="btn-add">Add</button>
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                <button type="button" class="btn btn-primary" id="btn-add">Adicionar</button>
               </div>
             </form>
           </div>
