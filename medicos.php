@@ -93,7 +93,7 @@
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
-        <a class="nav-link " href="index.php">
+        <a class="nav-link collapsed" href="index.php">
           <i class="bi bi-grid"></i>
           <span>Página principal</span>
         </a>
@@ -113,7 +113,7 @@
         </a>
       </li><!-- End Clientes Page Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="medicos.php">
+        <a class="nav-link " href="medicos.php">
           <i class="bi bi-activity"></i>
           <span>Médicos</span>
         </a>
@@ -179,7 +179,7 @@
           <div class="modal-content">
             <form id="user_form">
               <div class="modal-header">
-                <h4 class="modal-title">Add User</h4>
+                <h4 class="modal-title">Adicionar utente</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               </div>
               <div class="modal-body">

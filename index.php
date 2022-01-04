@@ -170,6 +170,7 @@
                         <th scope="col">Dia</th>
                         <th scope="col">Hora</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Opções</th>
                       </tr>
                     </thead>
                     <tbody>

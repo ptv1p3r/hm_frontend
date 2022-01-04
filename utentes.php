@@ -93,7 +93,7 @@
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
-        <a class="nav-link " href="index.php">
+        <a class="nav-link collapsed" href="index.php">
           <i class="bi bi-grid"></i>
           <span>Página principal</span>
         </a>
@@ -107,7 +107,7 @@
       </li><!-- End Consultas Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="utentes.php">
+        <a class="nav-link" href="utentes.php">
           <i class="bi bi-person"></i>
           <span>Utentes</span>
         </a>
@@ -133,14 +133,19 @@
     </div><!-- End Page Title -->
 
     <section class="section">
-
+ 
       <div class="container">
-        <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-sm" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Utente</span></a>
-        <p id="success"></p>
+      <div class="row"> 
+      <div class="col-12 mb-4">
+          <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Utente</span></a>
+          <p id="success"></p>
+            </div>
+      </div>
         <!-- Recent medical appointments -->
         <div class="col-12">
           <div class="card recent-sales">
             <div class="card-body">
+
               <h5 class="card-title">Utentes</h5>
               <th>
                 <table class="table table-borderless datatable">
