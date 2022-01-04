@@ -10,10 +10,23 @@
 --------------------------------------------------------------*/
 
 /*clinica.php*/
+.size-32 {
+  width: 32px;
+  height: 32px;
+}
+
 #clinica_main {
   margin-top: 60px;
   padding: 20px 30px;
   transition: all 0.3s;
+}
+
+.clinica_horario{
+  padding-top: 20px;
+}
+
+.clinica_row {
+  padding-top: 40px;
 }
 
 #clinica_footer {
@@ -26,10 +39,7 @@
 
 /*GOOGLE MAP*/
 .map-container-2{
-  overflow:hidden;
-  padding-bottom:56.25%;
-  position:relative;
-  height:0;
+  height:350px;
 }
 
 .map-container-2 iframe{
@@ -37,7 +47,7 @@
   top:0;
   height:100%;
   width:100%;
-  position:absolute;
+  padding-top: 20px;
 }
 /*FIM - GOOGLE MAP*/
 

@@ -60,36 +60,39 @@
           <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-6">
                         <!--Google map-->
-                        <div id="map-container-google-2" class="z-depth-1-half map-container-5" style="height: 300px">
+                        <div id="map-container-2" class="z-depth-1-half map-container-2">
                         <iframe src="https://maps.google.com/maps?q=chicago&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0" allowfullscreen></iframe>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <p>horario de funcionamento</p>
+                    <div class="col-md-6 clinica_horario">
+                        <p><i class="align-middle" data-feather="clock"></i> Horario de funcionamento</p>
+                        <p class="business-hour"> <span class="day"> Segunda-feira </span> <span class="float-end"> <span class="start">08:00</span> – <span class="end">20:00</span> </span></p>
+                        <p class="business-hour"> <span class="day"> Terça-feira </span> <span class="float-end"> <span class="start">08:00</span> – <span class="end">20:00</span> </span></p>
+                        <p class="business-hour"> <span class="day"> Quarta-feira </span> <span class="float-end"> <span class="start">08:00</span> – <span class="end">20:00</span> </span></p>
+                        <p class="business-hour"> <span class="day"> Quinta-feira </span> <span class="float-end"> <span class="start">08:00</span> – <span class="end">20:00</span> </span></p>
+                        <p class="business-hour"> <span class="day"> Sexta-feira </span> <span class="float-end"> <span class="start">08:00</span> – <span class="end">20:00</span> </span></p>
+                        <p class="business-hour"> <span class="day"> Sábado </span> <span class="float-end"> Fechado </span></p>
+                        <p class="business-hour"> <span class="day"> Domingo </span> <span class="float-end"> Fechado </span></p></aside>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row text-center clinica_row">
                     <div class="col-4">
-                        <div class="col-6">
-                            <i class="align-middle" data-feather="phone"></i>
-                        </div>
-                        <div class="col-6">
-                            <p>Emergency Cases: <br>
-                                (052) 611-5711</p>
-                        </div>
+                        <i class="size-32 align-middle" data-feather="phone"></i>
+                        <p>Emergency Cases: <br>
+                            (052) 611-5711</p>
                     </div>
                     <div class="col-4">
                         <div class="contact_through_inner">
-                            <i class="align-middle" data-feather="map-pin"></i>
+                            <i class="size-32 align-middle" data-feather="map-pin"></i>
                             <p>E7088 Micaela Cliffs, <br>
                                 Thielshire, OK 95062</p>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="contact_through_inner">
-                            <i class="align-middle" data-feather="mail"></i>
+                            <i class="size-32 align-middle" data-feather="mail"></i>
                             <p>Email Address<br>
                                 contact@meditex.com</p>
                         </div>
