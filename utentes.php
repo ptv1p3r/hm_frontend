@@ -173,8 +173,14 @@
                       <td><a class="text-primary"> Rua das carochas, n5</a></td>
                       <td><a class="text-primary">Portimão</a></td>
                       <td><a class="text-primary">961111222</a></td>
-
                     </tr>
+
+                    <!-- PHP dados tabela -->
+
+             
+
+                  <!--   Fim PHP dados tabela -->
+
                   </tbody>
                 </table>
             </div>
@@ -183,45 +189,7 @@
       </div>
       </div>
 
-      <div class="container">
-
-
-
-
-        <p id="success"></p>
-        <div class="table-wrapper">
-          <div class="table-title">
-            <div class="row">
-              <div class="col-sm-6">
-                <h2>Utentes</h2>
-              </div>
-              <div class="col-sm-6">
-                <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-sm" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Utente</span></a>
-              </div>
-            </div>
-          </div>
-          <table class="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>
-                  <span class="custom-checkbox">
-                    <input type="checkbox" id="selectAll">
-                    <label for="selectAll"></label>
-                  </span>
-                </th>
-                <th>Utente número</th>
-                <th>Nome</th>
-                <th>Morada</th>
-                <th>Cidade</th>
-                <th>Telemóvel</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
+    
 
 
       <!-- Add Modal HTML -->

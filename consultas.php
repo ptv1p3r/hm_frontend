@@ -8,7 +8,7 @@
   <title>Consultas LDA</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-  
+
   <!-- Favicons -->
   <link href="static/img/favicon.png" rel="icon">
   <link href="static/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -20,7 +20,7 @@
   <!-- Vendor CSS Files -->
   <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  
+
 
   <!-- Template Main CSS File -->
   <link href="static/css/style.css" rel="stylesheet">
@@ -100,14 +100,14 @@
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
       <li class="nav-item">
-        <a class="nav-link" href="consultas.php">
+        <a class="nav-link collapsed" href="consultas.php">
           <i class="bi bi-archive"></i>
           <span>Consultas</span>
         </a>
       </li><!-- End Consultas Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="utentes.php">
+        <a class="nav-link" href="utentes.php">
           <i class="bi bi-person"></i>
           <span>Utentes</span>
         </a>
@@ -115,36 +115,186 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="medicos.php">
           <i class="bi bi-activity"></i>
-          <span>Medicos</span>
+          <span>Médicos</span>
         </a>
-      </li><!-- End Medicos Page Nav -->
+      </li><!-- End Médicos Page Nav -->
     </ul>
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
     <div class="pagetitle">
-      <h1>Consultas</h1>
+      <h1>Consulta</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
-          <li class="breadcrumb-item active">Consultas</li>
+          <li class="breadcrumb-item active">Consulta</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
     <section class="section">
-      <div class="row">
-
-        <div class="col-lg-12">
-          <div class="card">
+ 
+      <div class="container">
+      <div class="row"> 
+      <div class="col-12 mb-4">
+          <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Utente</span></a>
+          <p id="success"></p>
+            </div>
+      </div>
+        <!-- Recent medical appointments -->
+        <div class="col-12">
+          <div class="card recent-sales">
             <div class="card-body">
-              <h5 class="card-title">Example Card</h5>
-              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+
+              <h5 class="card-title">Utentes</h5>
+              <th>
+                <table class="table table-borderless datatable">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nº Utente</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Morada</th>
+                      <th scope="col">Cidade</th>
+                      <th scope="col">Telemóvel</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row"><a href="#">#100</a></th>
+                      <td><a href="#" class="text-primary">Denis Botnaru</a></td>
+                      <td><a href="#" class="text-primary"> Rua das carochas, n5</a></td>
+                      <td><a href="#" class="date text-primary">Portimão</a></td>
+                      <td><a href="#" class="date text-primary">961111222</a></td>
+
+                    </tr>
+                    <tr>
+                      <th scope="row"><a href="#">#101</a></th>
+                      <td><a href="#" class="text-primary">Joaquim Roscas</a></td>
+                      <td><a class="text-primary"> Rua das carochas, n5</a></td>
+                      <td><a class="text-primary">Portimão</a></td>
+                      <td><a class="text-primary">961111222</a></td>
+                    </tr>
+
+                    <!-- PHP dados tabela -->
+
+             
+
+                  <!--   Fim PHP dados tabela -->
+
+                  </tbody>
+                </table>
             </div>
           </div>
-        </div>
-
+        </div><!-- End Recent medical appointments -->
       </div>
+      </div>
+
+    
+
+
+      <!-- Add Modal HTML -->
+      <div id="addEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form id="user_form">
+              <div class="modal-header">
+                <h4 class="modal-title">Add User</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Nome</label>
+                  <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>EMAIL</label>
+                  <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>PHONE</label>
+                  <input type="phone" id="phone" name="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>CITY</label>
+                  <input type="city" id="city" name="city" class="form-control" required>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <input type="hidden" value="1" name="type">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <button type="button" class="btn btn-success" id="btn-add">Add</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Edit Modal HTML -->
+      <div id="editEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form id="update_form">
+              <div class="modal-header">
+                <h4 class="modal-title">Edit User</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" id="id_u" name="id" class="form-control" required>
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" id="name_u" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" id="email_u" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>PHONE</label>
+                  <input type="phone" id="phone_u" name="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>City</label>
+                  <input type="city" id="city_u" name="city" class="form-control" required>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <input type="hidden" value="2" name="type">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <button type="button" class="btn btn-info" id="update">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Delete Modal HTML -->
+      <div id="deleteEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form>
+
+              <div class="modal-header">
+                <h4 class="modal-title">Delete User</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" id="id_d" name="id" class="form-control">
+                <p>Are you sure you want to delete these Records?</p>
+                <p class="text-warning"><small>This action cannot be undone.</small></p>
+              </div>
+              <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <button type="button" class="btn btn-danger" id="delete">Delete</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
     </section>
 
   </main><!-- End #main -->
@@ -166,17 +316,17 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="static/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="static/vendor/chart.js/chart.min.js"></script>
-  <script src="static/vendor/echarts/echarts.min.js"></script>
-  <script src="static/vendor/quill/quill.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="static/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="static/vendor/tinymce/tinymce.min.js"></script>
-  <script src="static/vendor/php-email-form/validate.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="static/js/main.js"></script>
+  <script src="static/js/user.js"></script>
 
 </body>
 
