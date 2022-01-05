@@ -1,3 +1,8 @@
+<?php
+  //$url = "http://localhost:5000/v1/consultas/list";
+  //$response = file_get_contents($url);
+  //echo $response;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -126,10 +131,12 @@
  
       <div class="container">
         <div class="row"> 
-        <div class="col-12 mb-3">
-            <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Criar Consulta</span></a>
-            <p id="success"></p>
-              </div>
+          <div class="col-12 mb-3">
+              <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Criar Consulta</span></a>
+              <p id="success"></p>
+              <!-- TEST BUTTON -->
+              <a href="" type="button" id="btn-teste" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Teste ajax</span></a>
+          </div>
         </div>
         <!-- Recent medical appointments -->
         <div class="col-12">
@@ -326,8 +333,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
 
     <script>
-    feather.replace()
-  </script>
+      feather.replace()
+    </script>
 
 </body>
 

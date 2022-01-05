@@ -11,3 +11,17 @@ $(document).on('click', '#btn-add', function (e) {
     }); 
     
 });
+
+
+$(document).on('click', '#btn-teste', function (e) {
+
+    $.ajax({
+        url: "http://localhost:5000/v1/consultas/list",
+        dataType: 'json',
+        type: 'GET',
+        success: function(data) {
+            alert(data);
+        }
+    });
+});
+
