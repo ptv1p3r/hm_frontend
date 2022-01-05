@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -132,7 +133,7 @@
       <div class="container">
       <div class="row"> 
       <div class="col-12 mb-3">
-          <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Utente</span></a>
+          <a href="#addClientModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Utente</span></a>
           <p id="success"></p>
             </div>
       </div>
@@ -150,31 +151,12 @@
                       <th scope="col">Morada</th>
                       <th scope="col">Cidade</th>
                       <th scope="col">Telemóvel</th>
-                      <th scope="col">Opções</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row"><a href="#">#100</a></th>
-                      <td><a href="#" class="text-primary">Denis Botnaru</a></td>
-                      <td><a href="#" class="text-primary"> Rua das carochas, n5</a></td>
-                      <td><a href="#" class="date text-primary">Portimão</a></td>
-                      <td><a href="#" class="date text-primary">961111222</a></td>
-                      <td><a href="#"><i class="size-26" data-feather="edit"></i></a>
-                          <a href="#"><i class="size-26" data-feather="eye"></i></a>
-                          <a href="#"><i class="size-26" data-feather="x"></i></a> </td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#">#101</a></th>
-                      <td><a href="#" class="text-primary">Joaquim Roscas</a></td>
-                      <td><a class="text-primary"> Rua das carochas, n5</a></td>
-                      <td><a class="text-primary">Portimão</a></td>
-                      <td><a class="text-primary">961111222</a></td>
-                    </tr>
-
+                   
                     <!-- PHP dados tabela -->
-
-             
+              
 
                   <!--   Fim PHP dados tabela -->
 
@@ -190,7 +172,7 @@
 
 
       <!-- Add Modal HTML -->
-      <div id="addEmployeeModal" class="modal fade">
+      <div id="addClientModal" class="modal fade">
         <div class="modal-dialog">
           <div class="modal-content">
             <form id="user_form">
@@ -201,21 +183,8 @@
               <div class="modal-body">
                 <div class="form-group">
                   <label>Nome</label>
-                  <input type="text" id="name" name="name" class="form-control" required>
+                  <input  id="name" name="name" class="form-control" required>
                 </div>
-                <div class="form-group">
-                  <label>EMAIL</label>
-                  <input type="email" id="email" name="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label>PHONE</label>
-                  <input type="phone" id="phone" name="phone" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label>CITY</label>
-                  <input type="city" id="city" name="city" class="form-control" required>
-                </div>
-              </div>
               <div class="modal-footer">
                 <input type="hidden" value="1" name="type">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
