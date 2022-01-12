@@ -13,6 +13,11 @@ $(document).on('click', '#btn-add', function (e) {
 });
 
 
+
+
+
+
+
 $(document).on('click', '#btn-teste', function (e) {
 
     $.ajax({
@@ -20,7 +25,7 @@ $(document).on('click', '#btn-teste', function (e) {
         dataType: 'json',
         type: 'GET',
         success: function(data) {
-            alert(data);
+            console.log(data);
         }
     });
 });
