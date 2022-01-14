@@ -142,47 +142,48 @@
         <div class="col-12">
           <div class="card recent-sales">
             <div class="card-body">
-            <h5 class="card-title">Consultas criadas</h5>
-              <th>
-                <table class="table table-borderless datatable">
-                  <thead>
-                    <tr>
-                      <th scope="col">Nº Utente</th>
-                      <th scope="col">Nome</th>
-                      <th scope="col">Morada</th>
-                      <th scope="col">Cidade</th>
-                      <th scope="col">Telemóvel</th>
-                      <th scope="col">Opções</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row"><a href="#">#100</a></th>
-                      <td><a href="#" class="text-primary">Denis Botnaru</a></td>
-                      <td><a href="#" class="text-primary"> Rua das carochas, n5</a></td>
-                      <td><a href="#" class="date text-primary">Portimão</a></td>
-                      <td><a href="#" class="date text-primary">961111222</a></td>
-                      <td><a href="#"><i class="size-26" data-feather="edit"></i></a>
-                          <a href="#"><i class="size-26" data-feather="eye"></i></a>
-                          <a href="#"><i class="size-26" data-feather="x"></i></a> </td>
+            <h5 id="TEST-AJAX" class="card-title">Consultas criadas</h5>
+              <table class="table table-borderless datatable">
+                <thead>
+                  <tr>
+                    <th scope="col">Nº Utente</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Morada</th>
+                    <th scope="col">Cidade</th>
+                    <th scope="col">Telemóvel</th>
+                    <th scope="col">Opções</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"><a href="#">#100</a></th>
+                    <td><a href="#" class="text-primary">Denis Botnaru</a></td>
+                    <td><a href="#" class="text-primary"> Rua das carochas, n5</a></td>
+                    <td><a href="#" class="date text-primary">Portimão</a></td>
+                    <td><a href="#" class="date text-primary">961111222</a></td>
+                    <td>
+                      <a href="#"><i class="size-26" data-feather="edit"></i></a>
+                      <a href="#"><i class="size-26" data-feather="eye"></i></a>
+                      <a href="#"><i class="size-26" data-feather="x"></i></a> 
+                    </td>
 
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#">#101</a></th>
-                      <td><a href="#" class="text-primary">Joaquim Roscas</a></td>
-                      <td><a class="text-primary"> Rua das carochas, n5</a></td>
-                      <td><a class="text-primary">Portimão</a></td>
-                      <td><a class="text-primary">961111222</a></td>
-                    </tr>
+                  </tr>
+                  <tr>
+                    <th scope="row"><a href="#">#101</a></th>
+                    <td><a href="#" class="text-primary">Joaquim Roscas</a></td>
+                    <td><a class="text-primary"> Rua das carochas, n5</a></td>
+                    <td><a class="text-primary">Portimão</a></td>
+                    <td><a class="text-primary">961111222</a></td>
+                  </tr>
 
-                    <!-- PHP dados tabela -->
+                  <!-- PHP dados tabela -->
 
-             
+            
 
-                  <!--   Fim PHP dados tabela -->
+                <!--   Fim PHP dados tabela -->
 
-                  </tbody>
-                </table>
+                </tbody>
+              </table>
             </div>
           </div>
         </div><!-- End Recent medical appointments -->
@@ -316,7 +317,6 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -333,7 +333,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
 
     <script>
+      //icons
       feather.replace()
+
+      //ideia AJAX para mostrar dados on document ready
+      $(document).ready(function() {
+        $.ajax({
+          url: "http://localhost:5000/v1/consultas/list",
+          dataType: 'json',
+          type: 'GET',
+          success: function(data) {
+              console.log(data);
+              $('#TEST-AJAX').html(data.message);
+              //document.getElementById("TEST-H5-AJAX").innerHTML = data.message
+          }
+        });
+      });
     </script>
 
 </body>
