@@ -42,13 +42,6 @@
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
-
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
@@ -85,7 +78,6 @@
 
   </header><!-- End Header -->
 
-  <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
@@ -96,7 +88,7 @@
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
       <li class="nav-item">
-        <a class="nav-link collapsed" href="consultas.php">
+        <a class="nav-link" href="consultas.php">
           <i class="bi bi-archive"></i>
           <span>Consultas</span>
         </a>
@@ -109,7 +101,7 @@
         </a>
       </li><!-- End Clientes Page Nav -->
       <li class="nav-item">
-        <a class="nav-link " href="medicos.php">
+        <a class="nav-link collapsed" href="medicos.php">
           <i class="bi bi-activity"></i>
           <span>Médicos</span>
         </a>
@@ -137,46 +129,24 @@
           <div class="card recent-sales">
             <div class="card-body">
             <h5 class="card-title">Médicos no sistema</h5>
-              <th>
-                <table class="table table-borderless datatable">
-                  <thead>
-                    <tr>
-                      <th scope="col">Nº Utente</th>
-                      <th scope="col">Nome</th>
-                      <th scope="col">Morada</th>
-                      <th scope="col">Cidade</th>
-                      <th scope="col">Telemóvel</th>
-                      <th scope="col">Opções</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row"><a href="#">#100</a></th>
-                      <td><a href="#" class="text-primary">Denis Botnaru</a></td>
-                      <td><a href="#" class="text-primary"> Rua das carochas, n5</a></td>
-                      <td><a href="#" class="date text-primary">Portimão</a></td>
-                      <td><a href="#" class="date text-primary">961111222</a></td>
-                      <td><a href="#"><i class="size-26" data-feather="edit"></i></a>
-                          <a href="#"><i class="size-26" data-feather="eye"></i></a>
-                          <a href="#"><i class="size-26" data-feather="x"></i></a></td>
+              <table class="table table-borderless datatable">
+                  <tr>
+                    <th scope="col-s-auto">Nome</th>
+                    <th scope="col-s-auto">Data nascimento</th>
+                    <th scope="col-s-auto">Tele.</th>
+                    <th scope="col-s-auto">Email</th>
+                    <th scope="col-s-auto">Especialidade</th>
+                    <th scope="col-s-auto">Cedula</th>
+                    <th scope="col-s-auto">NIF</th>
+                    <th scope="col-s-auto">Morada</th>
+                    <th scope="col-s-auto">Localidade</th>
+                    <th scope="col-s-auto">Cidade</th>
+                    <th scope="col-s-auto">Cod. postal</th>
+                  </tr>
+                  <tr>
 
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#">#101</a></th>
-                      <td><a href="#" class="text-primary">Joaquim Roscas</a></td>
-                      <td><a class="text-primary"> Rua das carochas, n5</a></td>
-                      <td><a class="text-primary">Portimão</a></td>
-                      <td><a class="text-primary">961111222</a></td>
-                    </tr>
-
-                    <!-- PHP dados tabela -->
-
-             
-
-                  <!--   Fim PHP dados tabela -->
-
-                  </tbody>
-                </table>
+                  </tr>
+              </table>
             </div>
           </div>
         </div><!-- End Recent medical appointments -->
@@ -296,14 +266,7 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+       &copy; 2022 <strong><span>Consultas LDA</span></strong>
     </div>
   </footer><!-- End Footer -->
 

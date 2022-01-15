@@ -24,6 +24,8 @@
 
   <!-- Template Main CSS File -->
   <link href="static/css/style.css" rel="stylesheet">
+
+
   <link href="static/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
@@ -43,13 +45,6 @@
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
-
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -98,14 +93,14 @@
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
       <li class="nav-item">
-        <a class="nav-link collapsed" href="consultas.php">
+        <a class="nav-link" href="consultas.php">
           <i class="bi bi-archive"></i>
           <span>Consultas</span>
         </a>
       </li><!-- End Consultas Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link" href="utentes.php">
+        <a class="nav-link collapsed" href="utentes.php">
           <i class="bi bi-person"></i>
           <span>Utentes</span>
         </a>
@@ -152,10 +147,10 @@
                   </thead>
                   <tbody>
                    
-                    <!-- PHP dados tabela -->
+                    <!-- html dados tabela -->
               
 
-                  <!--   Fim PHP dados tabela -->
+                  <!--   Fim html dados tabela -->
 
                   </tbody>
                 </table>
@@ -265,14 +260,7 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+       &copy; 2022 <strong><span>Consultas LDA</span></strong>
     </div>
   </footer><!-- End Footer -->
 
@@ -285,9 +273,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="static/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="static/vendor/tinymce/tinymce.min.js"></script>
-   
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="static/js/main.js"></script>

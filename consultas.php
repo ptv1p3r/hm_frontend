@@ -1,8 +1,3 @@
-<?php
-  //$url = "http://localhost:5000/v1/consultas/list";
-  //$response = file_get_contents($url);
-  //echo $response;
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,13 +40,6 @@
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
-
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -134,56 +122,53 @@
           <div class="col-12 mb-3">
               <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Criar Consulta</span></a>
               <p id="success"></p>
-              <!-- TEST BUTTON -->
-              <a href="" type="button" id="btn-teste" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Teste ajax</span></a>
           </div>
         </div>
         <!-- Recent medical appointments -->
         <div class="col-12">
           <div class="card recent-sales">
             <div class="card-body">
-            <h5 id="TEST-AJAX" class="card-title">Consultas criadas</h5>
-              <table class="table table-borderless datatable">
-                <thead>
-                  <tr>
-                    <th scope="col">Nº Utente</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Morada</th>
-                    <th scope="col">Cidade</th>
-                    <th scope="col">Telemóvel</th>
-                    <th scope="col">Opções</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"><a href="#">#100</a></th>
-                    <td><a href="#" class="text-primary">Denis Botnaru</a></td>
-                    <td><a href="#" class="text-primary"> Rua das carochas, n5</a></td>
-                    <td><a href="#" class="date text-primary">Portimão</a></td>
-                    <td><a href="#" class="date text-primary">961111222</a></td>
-                    <td>
-                      <a href="#"><i class="size-26" data-feather="edit"></i></a>
-                      <a href="#"><i class="size-26" data-feather="eye"></i></a>
-                      <a href="#"><i class="size-26" data-feather="x"></i></a> 
-                    </td>
+            <h5 class="card-title">Consultas criadas</h5>
+              <th>
+                <table class="table table-borderless datatable">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nº Utente</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Morada</th>
+                      <th scope="col">Cidade</th>
+                      <th scope="col">Telemóvel</th>
+                      <th scope="col">Opções</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row"><a href="#">#100</a></th>
+                      <td><a href="#" class="text-primary">Denis Botnaru</a></td>
+                      <td><a href="#" class="text-primary"> Rua das carochas, n5</a></td>
+                      <td><a href="#" class="date text-primary">Portimão</a></td>
+                      <td><a href="#" class="date text-primary">961111222</a></td>
+                      <td><a href="#"><i class="size-26" data-feather="edit"></i></a>
+                          <a href="#"><i class="size-26" data-feather="eye"></i></a>
+                          <a href="#"><i class="size-26" data-feather="x"></i></a> </td>
 
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#">#101</a></th>
-                    <td><a href="#" class="text-primary">Joaquim Roscas</a></td>
-                    <td><a class="text-primary"> Rua das carochas, n5</a></td>
-                    <td><a class="text-primary">Portimão</a></td>
-                    <td><a class="text-primary">961111222</a></td>
-                  </tr>
+                    </tr>
+                    <tr>
+                      <th scope="row"><a href="#">#101</a></th>
+                      <td><a href="#" class="text-primary">Joaquim Roscas</a></td>
+                      <td><a class="text-primary"> Rua das carochas, n5</a></td>
+                      <td><a class="text-primary">Portimão</a></td>
+                      <td><a class="text-primary">961111222</a></td>
+                    </tr>
 
-                  <!-- PHP dados tabela -->
+                    <!-- html dados tabela -->
 
-            
+             
 
-                <!--   Fim PHP dados tabela -->
+                  <!--   Fim html dados tabela -->
 
-                </tbody>
-              </table>
+                  </tbody>
+                </table>
             </div>
           </div>
         </div><!-- End Recent medical appointments -->
@@ -203,6 +188,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               </div>
               <div class="modal-body">
+                <form>
                 <div class="form-group">
                   <label>Nome</label>
                   <input type="text" id="name" name="name" class="form-control" required>
@@ -219,11 +205,13 @@
                   <label>CITY</label>
                   <input type="city" id="city" name="city" class="form-control" required>
                 </div>
+              </form>
               </div>
+            
               <div class="modal-footer">
                 <input type="hidden" value="1" name="type">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-                <button type="button" class="btn btn-primary" id="btn-add">Adicionar</button>
+                <button type="button" onclick="insert();" class="btn btn-primary" id="btn-add">Adicionar</button>
               </div>
             </form>
           </div>
@@ -303,20 +291,14 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+       &copy; 2022 <strong><span>Consultas LDA</span></strong>
     </div>
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
+  
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -333,7 +315,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
 
     <script>
-      //icons
+
       feather.replace()
 
       //ideia AJAX para mostrar dados on document ready
