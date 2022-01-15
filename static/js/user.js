@@ -14,12 +14,7 @@
 
 
 
-
-
-
-
 $(document).on('click', '#btn-teste', function (e) {
-
     $.ajax({
         url: "http://localhost:5000/v1/consultas/list",
         dataType: 'json',

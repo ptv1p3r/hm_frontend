@@ -296,7 +296,7 @@
 
   <!-- Template Main JS File -->
   <script src="static/js/main.js"></script>
-  <script src="static/js/user.js"></script>
+  <script src="static/js/medicos.js"></script>
 
 
 <!-- data-feather icons -->
@@ -304,32 +304,6 @@
 
 <script>
   feather.replace()
-  
-  
-  $("#user_form").submit(function (event){
-        event.preventDefault();
-
-        var formData = {
-            'data': $(this).serializeArray()
-        };
-
-        console.log("CONA : ", formData);
-
-      });
-
-      //ideia AJAX para mostrar dados on document ready
-      $(document).ready(function() {
-          $.ajax({
-              url: "http://localhost:5000/v1/medicos/list",
-              dataType: 'json',
-              type: 'GET',
-              success: function(data) {
-                  console.log(data);
-                  $('#TEST-AJAX').html(data.count);
-                  //document.getElementById("TEST-H5-AJAX").innerHTML = data.message
-              }
-          });
-      });
 </script>
 
 </body>
