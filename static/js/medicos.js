@@ -3,17 +3,32 @@
 $("#user_form").submit(function (event){
     event.preventDefault();
 
-    var formData = {
+    /*var formData = {
         'data': $(this).serializeArray()
-    };
+    };*/
+
+    const formData = new FormData(event.target);
+    const formDataToEncode = {};
+    formData.forEach((value, key) => (formDataToEncode[key] = value));
+    console.log(formDataToEncode);
 
     $.ajax({
-        url: "http://localhost:5000/v1/medicos/create",
+        url: "/projects/hm_frontend/toJson.php",
         dataType: 'json',
         type: 'POST',
-        data: formData,
-        success: function(data) {
-            console.log(data);
+        data: {FormDataToJson: formDataToEncode},
+        success: function(dataEncoded) {
+            console.log(dataEncoded);
+
+            $.ajax({
+                url: "http://localhost:5000/v1/medicos/create",
+                dataType: 'json',
+                type: 'POST',
+                data: dataEncoded,
+                success: function(data) {
+                    console.log(data);
+                }
+            });
         }
     });
 });

@@ -197,7 +197,6 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <input type="hidden" value="1" name="type">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
                 <button type="submit" class="btn btn-primary" id="btn-add">Adicionar</button>
               </div>
