@@ -132,16 +132,13 @@
               <table class="table table-borderless datatable">
                   <tr>
                     <th scope="col-s-auto">Nome</th>
-                    <th scope="col-s-auto">Data nascimento</th>
-                    <th scope="col-s-auto">Tele.</th>
-                    <th scope="col-s-auto">Email</th>
-                    <th scope="col-s-auto">Especialidade</th>
-                    <th scope="col-s-auto">Cedula</th>
-                    <th scope="col-s-auto">NIF</th>
                     <th scope="col-s-auto">Morada</th>
-                    <th scope="col-s-auto">Localidade</th>
-                    <th scope="col-s-auto">Cidade</th>
-                    <th scope="col-s-auto">Cod. postal</th>
+                    <th scope="col-s-auto">CodPostal</th>
+                    <th scope="col-s-auto">Email</th>
+                    <th scope="col-s-auto">Nif</th> 
+                    <th scope="col-s-auto">C.Profissional</th>
+                    <th scope="col-s-auto">Telemovel</th>
+                    <th scope="col-s-auto">DataNascimento</th>
                   </tr>
                   <tr>
 
@@ -171,16 +168,32 @@
                   <input type="text" id="name" name="name" class="form-control" required>
                 </div>
                 <div class="form-group">
+                  <label>Morada</label>
+                  <input type="text" id="address" name="address" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>CodPostal</label>
+                  <input type="text" id="codpostal" name="codpostal" class="form-control" required>
+                </div>
+                <div class="form-group">
                   <label>Email</label>
-                  <input type="email" id="email" name="email" class="form-control" required>
+                  <input type="text" id="email" name="email" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label>Phone</label>
-                  <input type="phone" id="phone" name="phone" class="form-control" required>
+                  <label>Nif</label>
+                  <input type="text" id="nif" name="nif" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label>CITY</label>
-                  <input type="city" id="city" name="city" class="form-control" required>
+                  <label>C.Profissional</label>
+                  <input type="text" id="cprofissional" name="cprofissional" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>Telemovel</label>
+                  <input type="text" id="phone" name="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>DataNascimento</label>
+                  <input type="text" id="datanascimento" name="datanascimento" class="form-control" required>
                 </div>
               </div>
               <div class="modal-footer">
