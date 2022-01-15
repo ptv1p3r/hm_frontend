@@ -1,4 +1,4 @@
-$(document).on('click', '#btn-add', function (e) {
+/*$(document).on('click', '#btn-add', function (e) {
     var data = $("#user_form").serialize();
     e.preventDefault();
     
@@ -10,7 +10,7 @@ $(document).on('click', '#btn-add', function (e) {
         console.log(result)
     }); 
     
-});
+});*/
 
 
 

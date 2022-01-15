@@ -128,7 +128,7 @@
         <div class="col-12">
           <div class="card recent-sales">
             <div class="card-body">
-            <h5 class="card-title">Médicos no sistema</h5>
+            <h5 id="TEST-AJAX" class="card-title">Médicos no sistema</h5>
               <table class="table table-borderless datatable">
                   <tr>
                     <th scope="col-s-auto">Nome</th>
@@ -163,7 +163,7 @@
             <form id="user_form">
               <div class="modal-header">
                 <h4 class="modal-title">Adicionar Médico</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
               </div>
               <div class="modal-body">
                 <div class="form-group">
@@ -171,11 +171,11 @@
                   <input type="text" id="name" name="name" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label>EMAIL</label>
+                  <label>Email</label>
                   <input type="email" id="email" name="email" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label>PHONE</label>
+                  <label>Phone</label>
                   <input type="phone" id="phone" name="phone" class="form-control" required>
                 </div>
                 <div class="form-group">
@@ -186,7 +186,7 @@
               <div class="modal-footer">
                 <input type="hidden" value="1" name="type">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-                <button type="button" class="btn btn-primary" id="btn-add">Adicionar</button>
+                <button type="submit" class="btn btn-primary" id="btn-add">Adicionar</button>
               </div>
             </form>
           </div>
@@ -226,7 +226,7 @@
               <div class="modal-footer">
                 <input type="hidden" value="2" name="type">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                <button type="button" class="btn btn-info" id="update">Update</button>
+                <button type="submit" class="btn btn-info" id="update">Update</button>
               </div>
             </form>
           </div>
@@ -243,7 +243,7 @@
 
               <div class="modal-header">
                 <h4 class="modal-title">Delete User</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
               </div>
               <div class="modal-body">
                 <input type="hidden" id="id_d" name="id" class="form-control">
@@ -252,7 +252,7 @@
               </div>
               <div class="modal-footer">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                <button type="button" class="btn btn-danger" id="delete">Delete</button>
+                <button type="submit" class="btn btn-danger" id="delete">Delete</button>
               </div>
             </form>
           </div>
@@ -286,12 +286,38 @@
   <script src="static/js/user.js"></script>
 
 
-    <!-- data-feather icons -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+<!-- data-feather icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
 
-    <script>
-    feather.replace()
-    </script>
+<script>
+  feather.replace()
+  
+  
+  $("#user_form").submit(function (event){
+        event.preventDefault();
+
+        var formData = {
+            'data': $(this).serializeArray()
+        };
+
+        console.log("CONA : ", formData);
+
+      });
+
+      //ideia AJAX para mostrar dados on document ready
+      $(document).ready(function() {
+          $.ajax({
+              url: "http://localhost:5000/v1/medicos/list",
+              dataType: 'json',
+              type: 'GET',
+              success: function(data) {
+                  console.log(data);
+                  $('#TEST-AJAX').html(data.count);
+                  //document.getElementById("TEST-H5-AJAX").innerHTML = data.message
+              }
+          });
+      });
+</script>
 
 </body>
 
