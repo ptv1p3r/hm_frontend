@@ -1,3 +1,4 @@
+/*
 $(document).on('click', '#btn-add', function (e) {
     e.preventDefault();
     var u_name = $("#name").val();
@@ -18,6 +19,4 @@ $(document).on('click', '#btn-add', function (e) {
 
             
     })
-
-
-
+*/
