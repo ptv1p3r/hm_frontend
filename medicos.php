@@ -137,11 +137,9 @@
           <div class="card recent-sales">
             <div class="card-body">
             <h5 id="TEST-AJAX" class="card-title">Médicos no sistema</h5>
-              <div id="test_table">
-
-              </div>
-              <!--<table id="test_table" class="table table-borderless datatable">
-                  <tr>
+              <table id="test_table" class="table table-borderless datatable">
+                  <thead>
+                    <!--<tr>
                     <th scope="col-s-auto">Nome</th>
                     <th scope="col-s-auto">Morada</th>
                     <th scope="col-s-auto">CodPostal</th>
@@ -150,11 +148,11 @@
                     <th scope="col-s-auto">C.Profissional</th>
                     <th scope="col-s-auto">Telemovel</th>
                     <th scope="col-s-auto">DataNascimento</th>
-                  </tr>
-                    <tbody>
-                    </tbody>
-                  </tr>
-              </table>-->
+                  </tr>-->
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table>
             </div>
           </div>
         </div><!-- End Recent medical appointments -->
@@ -312,7 +310,7 @@
 
 <!-- data-feather icons -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
-<script>feather.replace()</script>
+<script> feather.replace()</script>
 
 <script>
   $(document).ready(function() {
@@ -360,22 +358,32 @@
 
               dataObject.push(temp);
             }
-            console.log(dataObject);
-            document.getElementById("test_table").innerHTML = generateTable(dataObject); 
+            console.log(dataObject); 
+            document.getElementById("test_table").innerHTML = generateTable(dataObject);
+        },
+        error: function (err) {
+          console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+          document.getElementById("test_table").innerHTML = ("AJAX error in request: " + JSON.stringify(err, null, 2));
         }
     });
 
     //funcao generateTable medicos
-    function generateTable(tblArray){
-      var keys = Object.keys(tblArray[0]);
+    function generateTable(dataObject){
+      var keys = Object.keys(dataObject[0]);
         var mytable = `<table class="table table-borderless datatable">`;
-        mytable += "<tr>" 
+        mytable += "<thead>";
+        mytable += "<tr>";
         for (var key of keys) {
           mytable += `<th scope="col-s-auto">` + key + "</th>"; 
         }
-        mytable += "</tr>"
-        for (var CELL of tblArray) {
-          mytable += "<tr>"  
+        mytable += `<th scope="col-s-auto">` + "Editar" + "</th>";
+        mytable += `<th scope="col-s-auto">` + "Apagar" + "</th>";
+        mytable += "</tr>";
+        mytable += "</thead>";
+
+        mytable += "<tbody>";
+        for (var CELL of dataObject) {
+          mytable += "<tr>";
           mytable += `<td>` + CELL.id + "</td>"; 
           mytable += `<td>` + CELL.Nome + "</td>";
           mytable += `<td>` + CELL.Morada + "</td>";
@@ -385,14 +393,17 @@
           mytable += `<td>` + CELL.DataNascimento + "</td>";
           mytable += `<td>` + CELL.Datecreate + "</td>";
           mytable += `<td>` + CELL.Datemodify + "</td>";
-          mytable += "</tr>" 
+          mytable += `<td><button type="submit" class="btn btn-warning" value="`+ CELL.id +`" id="btn-add">Editar</button></td>`;
+          mytable += `<td><button type="submit" class="btn btn-danger" value="`+ CELL.id +`" id="btn-add">Apagar</button></td>`;
+          mytable += "</tr>";
         }
+        mytable += "</tbody>";
         mytable += "</table>";
 
         return mytable;
     }
 });
 </script>
-</body>
 
+</body>
 </html>
