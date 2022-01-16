@@ -88,7 +88,7 @@
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
       <li class="nav-item">
-        <a class="nav-link" href="consultas.php">
+        <a class="nav-link collapsed" href="consultas.php">
           <i class="bi bi-archive"></i>
           <span>Consultas</span>
         </a>
@@ -101,7 +101,7 @@
         </a>
       </li><!-- End Clientes Page Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="medicos.php">
+        <a class="nav-link" href="medicos.php">
           <i class="bi bi-activity"></i>
           <span>Médicos</span>
         </a>
