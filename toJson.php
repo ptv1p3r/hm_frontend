@@ -16,7 +16,8 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
                     'Nif' => $data[4]['value'],
                     'C.Profissional' => $data[5]['value'],
                     'Telemovel' => $data[6]['value'],
-                    'DataNascimento' => $data[7]['value']
+                    'DataNascimento' => $data[7]['value'],
+                    'IdEspecialidade' => $data[8]['value']
                 );
 
                 $result = callAPI("POST", "http://localhost:5000/v1/medicos/create", $dataObject);

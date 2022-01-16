@@ -167,10 +167,9 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <form id="user_form">
-       
               <div class="modal-header">
                 <h4 class="modal-title">Adicionar Médico</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <button id="modal-btn-close" type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
               </div>
               <div class="modal-body">
                 <div class="form-group">
@@ -204,6 +203,10 @@
                 <div class="form-group">
                   <label>DataNascimento</label>
                   <input type="text" id="datanascimento" name="datanascimento" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>IdEspecialidade</label>
+                  <input type="text" id="idEspecialidade" name="idEspecialidade" class="form-control" required>
                 </div>
               </div>
               <div class="modal-footer">
@@ -330,6 +333,40 @@
             data: formData,
             success: function(response) {
                 console.log('response tua ::', response );
+
+                document.getElementById("modal-btn-close").click();
+
+                $.ajax({
+                    url: "http://localhost:5000/v1/medicos/list",
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function(data) {
+                        console.log(data);
+
+                        var dataObject = [];
+                        for (var med of data.data) {
+                          var temp = { id: "", Nome: "", Morada: "", CodPostal: "", Email: "", Nif: "", DataNascimento: "", Datecreate: "", Datemodify: ""};
+
+                          temp.id = med.id; 
+                          temp.Nome = med.nome;
+                          temp.Morada = med.morada;
+                          temp.CodPostal = med.codpost;
+                          temp.Email = med.email;
+                          temp.Nif = med.nif;
+                          temp.DataNascimento = med.datanascimento;
+                          temp.Datecreate = med.datecreate;
+                          temp.Datemodify = med.datemodify;
+
+                          dataObject.push(temp);
+                        }
+                        console.log(dataObject); 
+                        document.getElementById("test_table").innerHTML = generateTable(dataObject);
+                    },
+                    error: function (err) {
+                      console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+                      document.getElementById("test_table").innerHTML = ("AJAX error in request: " + JSON.stringify(err, null, 2));
+                    }
+                });
             }
         });
     });
