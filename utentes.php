@@ -93,14 +93,14 @@
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
       <li class="nav-item">
-        <a class="nav-link" href="consultas.php">
+        <a class="nav-link collapsed" href="consultas.php">
           <i class="bi bi-archive"></i>
           <span>Consultas</span>
         </a>
       </li><!-- End Consultas Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="utentes.php">
+        <a class="nav-link " href="utentes.php">
           <i class="bi bi-person"></i>
           <span>Utentes</span>
         </a>
