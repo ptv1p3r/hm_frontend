@@ -1,27 +1,23 @@
-/*$(document).on('click', '#btn-add', function (e) {
-    var data = $("#user_form").serialize();
+$(document).on('click', '#btn-add', function (e) {
     e.preventDefault();
-    
+    var u_name = $("#name").val();
+    console.log(name);
+
     $.ajax({
-        data: data,
-        type: "post",
-        url: "database.php",
-    }).done(function(result){
-        console.log(result)
-    }); 
-    
-});*/
-
-
-
-$(document).on('click', '#btn-teste', function (e) {
-    $.ajax({
-        url: "http://localhost:5000/v1/consultas/list",
+        url: "http://localhost:5000/v1/medicos/create",
         dataType: 'json',
-        type: 'GET',
-        success: function(data) {
-            console.log(data);
-        }
-    });
-});
+        method: 'POST',
+        contentType: "application/json",
+        data: {
+            name:u_name
+        },
+        dataType:'json' 
+      }).done(function(result){
+          console.log(result)
+      })
+
+            
+    })
+
+
 

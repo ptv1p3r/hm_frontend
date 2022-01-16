@@ -124,6 +124,8 @@
           <p id="success"></p>
             </div>
       </div>
+
+   
         <!-- Recent medical appointments -->
         <div class="col-12">
           <div class="card recent-sales">
@@ -140,10 +142,20 @@
                     <th scope="col-s-auto">Telemovel</th>
                     <th scope="col-s-auto">DataNascimento</th>
                   </tr>
-                  <tr>
+         
+                    </thead>
+                      <tbody >
+                      
+                      <!-- html dados tabela -->
+                      
 
+                      <!--   Fim html dados tabela -->
+
+                      </tbody>
                   </tr>
+         
               </table>
+
             </div>
           </div>
         </div><!-- End Recent medical appointments -->
@@ -157,7 +169,8 @@
       <div id="addEmployeeModal" class="modal fade">
         <div class="modal-dialog">
           <div class="modal-content">
-            <form id="user_form">
+            <form id="user_form"  method="POST">
+       
               <div class="modal-header">
                 <h4 class="modal-title">Adicionar Médico</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
@@ -188,7 +201,7 @@
                   <input type="text" id="cprofissional" name="cprofissional" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label>Telemovel</label>
+                  <label>Telemóvel</label>
                   <input type="text" id="phone" name="phone" class="form-control" required>
                 </div>
                 <div class="form-group">

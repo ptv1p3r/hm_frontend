@@ -1,40 +1,28 @@
-
-//CREATE medico
+$(document).ready(function() {
+    //CREATE medico
 $("#user_form").submit(function (event){
     event.preventDefault();
-
-    /*var formData = {
+    var formData = {
         'data': $(this).serializeArray()
-    };*/
-
-    const formData = new FormData(event.target);
-    const formDataToEncode = {};
-    formData.forEach((value, key) => (formDataToEncode[key] = value));
-    console.log(formDataToEncode);
+    };
+console.log(formData)
+    
 
     $.ajax({
-        url: "/projects/hm_frontend/toJson.php",
+        url: "/hm_frontend/toJson.php",
         dataType: 'json',
         type: 'POST',
-        data: {FormDataToJson: formDataToEncode},
-        success: function(dataEncoded) {
-            console.log(dataEncoded);
-
-            $.ajax({
-                url: "http://localhost:5000/v1/medicos/create",
-                dataType: 'json',
-                type: 'POST',
-                data: dataEncoded,
-                success: function(data) {
-                    console.log(data);
-                }
-            });
+        data: formData,
+        success: function(data) {
+            console.log('response tua::', data );
         }
     });
+    console.log("");
+    
 });
 
 //AJAX para mostrar dados on document ready
-$(document).ready(function() {
+
     $.ajax({
         url: "http://localhost:5000/v1/medicos/list",
         dataType: 'json',
@@ -46,3 +34,4 @@ $(document).ready(function() {
         }
     });
 });
+
