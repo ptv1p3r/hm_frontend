@@ -1,3 +1,9 @@
+
+<?php
+  //get URL
+  $path = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
+  $path .=$_SERVER["SERVER_NAME"]. dirname($_SERVER["PHP_SELF"]);        
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -131,7 +137,10 @@
           <div class="card recent-sales">
             <div class="card-body">
             <h5 id="TEST-AJAX" class="card-title">Médicos no sistema</h5>
-              <table class="table table-borderless datatable">
+              <div id="test_table">
+
+              </div>
+              <!--<table id="test_table" class="table table-borderless datatable">
                   <tr>
                     <th scope="col-s-auto">Nome</th>
                     <th scope="col-s-auto">Morada</th>
@@ -142,20 +151,10 @@
                     <th scope="col-s-auto">Telemovel</th>
                     <th scope="col-s-auto">DataNascimento</th>
                   </tr>
-         
-                    </thead>
-                      <tbody >
-                      
-                      <!-- html dados tabela -->
-                      
-
-                      <!--   Fim html dados tabela -->
-
-                      </tbody>
+                    <tbody>
+                    </tbody>
                   </tr>
-         
-              </table>
-
+              </table>-->
             </div>
           </div>
         </div><!-- End Recent medical appointments -->
@@ -169,7 +168,7 @@
       <div id="addEmployeeModal" class="modal fade">
         <div class="modal-dialog">
           <div class="modal-content">
-            <form id="user_form"  method="POST">
+            <form id="user_form">
        
               <div class="modal-header">
                 <h4 class="modal-title">Adicionar Médico</h4>
@@ -308,16 +307,92 @@
 
   <!-- Template Main JS File -->
   <script src="static/js/main.js"></script>
-  <script src="static/js/medicos.js"></script>
+  <!--<script src="static/js/medicos.js"></script>-->
 
 
 <!-- data-feather icons -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+<script>feather.replace()</script>
 
 <script>
-  feather.replace()
-</script>
+  $(document).ready(function() {
+    //CREATE medico
+    $("#user_form").submit(function (event){
+        event.preventDefault();
+        var formData = {
+            'action': 'addMedico',
+            'data': $(this).serializeArray()
+        };
+        console.log(formData)
+        
+        $.ajax({
+            url: "<?php echo $path . "/toJson.php" ?>",
+            dataType: 'json',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                console.log('response tua ::', response );
+            }
+        });
+    });
 
+    //AJAX para mostrar dados on document ready
+    $.ajax({
+        url: "http://localhost:5000/v1/medicos/list",
+        dataType: 'json',
+        type: 'GET',
+        success: function(data) {
+            console.log(data);
+
+            var dataObject = [];
+            for (var med of data.data) {
+              var temp = { id: "", Nome: "", Morada: "", CodPostal: "", Email: "", Nif: "", DataNascimento: "", Datecreate: "", Datemodify: ""};
+
+              temp.id = med.id; 
+              temp.Nome = med.nome;
+              temp.Morada = med.morada;
+              temp.CodPostal = med.codpost;
+              temp.Email = med.email;
+              temp.Nif = med.nif;
+              temp.DataNascimento = med.datanascimento;
+              temp.Datecreate = med.datecreate;
+              temp.Datemodify = med.datemodify;
+
+              dataObject.push(temp);
+            }
+            console.log(dataObject);
+            document.getElementById("test_table").innerHTML = generateTable(dataObject); 
+        }
+    });
+
+    //funcao generateTable medicos
+    function generateTable(tblArray){
+      var keys = Object.keys(tblArray[0]);
+        var mytable = `<table class="table table-borderless datatable">`;
+        mytable += "<tr>" 
+        for (var key of keys) {
+          mytable += `<th scope="col-s-auto">` + key + "</th>"; 
+        }
+        mytable += "</tr>"
+        for (var CELL of tblArray) {
+          mytable += "<tr>"  
+          mytable += `<td>` + CELL.id + "</td>"; 
+          mytable += `<td>` + CELL.Nome + "</td>";
+          mytable += `<td>` + CELL.Morada + "</td>";
+          mytable += `<td>` + CELL.CodPostal + "</td>";
+          mytable += `<td>` + CELL.Email + "</td>";
+          mytable += `<td>` + CELL.Nif + "</td>";
+          mytable += `<td>` + CELL.DataNascimento + "</td>";
+          mytable += `<td>` + CELL.Datecreate + "</td>";
+          mytable += `<td>` + CELL.Datemodify + "</td>";
+          mytable += "</tr>" 
+        }
+        mytable += "</table>";
+
+        return mytable;
+    }
+});
+</script>
 </body>
 
 </html>
