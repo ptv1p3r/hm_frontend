@@ -1,4 +1,3 @@
-
 <?php
   //get URL
   $path = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
@@ -126,7 +125,7 @@
       <div class="container">
       <div class="row"> 
       <div class="col-12 mb-3">
-          <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Médico</span></a>
+          <a href="#addModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Médico</span></a>
           <p id="success"></p>
             </div>
       </div>
@@ -163,10 +162,10 @@
 
 
       <!-- Add Modal HTML -->
-      <div id="addEmployeeModal" class="modal fade">
+      <div id="addModal" class="modal fade">
         <div class="modal-dialog">
           <div class="modal-content">
-            <form id="user_form">
+            <form id="add_form">
               <div class="modal-header">
                 <h4 class="modal-title">Adicionar Médico</h4>
                 <button id="modal-btn-close" type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
@@ -205,7 +204,7 @@
                   <input type="text" id="datanascimento" name="datanascimento" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label>IdEspecialidade</label>
+                  <label>Especialidade</label>
                   <input type="text" id="idEspecialidade" name="idEspecialidade" class="form-control" required>
                 </div>
               </div>
@@ -219,39 +218,57 @@
       </div>
 
 
-
-      <!-- Edit Modal HTML -->
-      <div id="editEmployeeModal" class="modal fade">
+      <!-- Update Modal HTML -->
+      <div id="updateModal" class="modal fade">
         <div class="modal-dialog">
           <div class="modal-content">
             <form id="update_form">
               <div class="modal-header">
-                <h4 class="modal-title">Edit User</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Editar Médico</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
               </div>
               <div class="modal-body">
-                <input type="hidden" id="id_u" name="id" class="form-control" required>
                 <div class="form-group">
-                  <label>Name</label>
-                  <input type="text" id="name_u" name="name" class="form-control" required>
+                    <label>Nome</label>
+                    <input type="hidden" id="id" name="id" class="form-control">
+                    <input type="text" id="name" name="name" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Morada</label>
+                    <input type="text" id="address" name="address" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>CodPostal</label>
+                    <input type="text" id="codpostal" name="codpostal" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" id="email" name="email" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Nif</label>
+                    <input type="text" id="nif" name="nif" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>C.Profissional</label>
+                    <input type="text" id="cprofissional" name="cprofissional" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Telemóvel</label>
+                    <input type="text" id="phone" name="phone" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>DataNascimento</label>
+                    <input type="text" id="datanascimento" name="datanascimento" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Especialidade</label>
+                    <input type="text" id="idEspecialidade" name="idEspecialidade" class="form-control" required>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label>Email</label>
-                  <input type="email" id="email_u" name="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label>PHONE</label>
-                  <input type="phone" id="phone_u" name="phone" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label>City</label>
-                  <input type="city" id="city_u" name="city" class="form-control" required>
-                </div>
-              </div>
               <div class="modal-footer">
-                <input type="hidden" value="2" name="type">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                <button type="submit" class="btn btn-info" id="update">Update</button>
+                <button type="submit" class="btn btn-info" id="update">Guardar</button>
               </div>
             </form>
           </div>
@@ -259,13 +276,11 @@
       </div>
 
 
-
       <!-- Delete Modal HTML -->
-      <div id="deleteEmployeeModal" class="modal fade">
+      <div id="deleteModal" class="modal fade">
         <div class="modal-dialog">
           <div class="modal-content">
-            <form>
-
+            <form id="delete_form">
               <div class="modal-header">
                 <h4 class="modal-title">Delete User</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
@@ -298,7 +313,6 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -308,17 +322,20 @@
 
   <!-- Template Main JS File -->
   <script src="static/js/main.js"></script>
-  <!--<script src="static/js/medicos.js"></script>-->
 
 
 <!-- data-feather icons -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
-<script> feather.replace()</script>
+<script> feather.replace(); </script>
 
 <script>
   $(document).ready(function() {
+
+    //call func to ajax list medicos
+    ListMedicos();
+
     //CREATE medico
-    $("#user_form").submit(function (event){
+    $("#add_form").submit(function (event){
         event.preventDefault();
         var formData = {
             'action': 'addMedico',
@@ -334,75 +351,96 @@
             success: function(response) {
                 console.log('response tua ::', response );
 
-                document.getElementById("modal-btn-close").click();
-
-                $.ajax({
-                    url: "http://localhost:5000/v1/medicos/list",
-                    dataType: 'json',
-                    type: 'GET',
-                    success: function(data) {
-                        console.log(data);
-
-                        var dataObject = [];
-                        for (var med of data.data) {
-                          var temp = { id: "", Nome: "", Morada: "", CodPostal: "", Email: "", Nif: "", DataNascimento: "", Datecreate: "", Datemodify: ""};
-
-                          temp.id = med.id; 
-                          temp.Nome = med.nome;
-                          temp.Morada = med.morada;
-                          temp.CodPostal = med.codpost;
-                          temp.Email = med.email;
-                          temp.Nif = med.nif;
-                          temp.DataNascimento = med.datanascimento;
-                          temp.Datecreate = med.datecreate;
-                          temp.Datemodify = med.datemodify;
-
-                          dataObject.push(temp);
-                        }
-                        console.log(dataObject); 
-                        document.getElementById("test_table").innerHTML = generateTable(dataObject);
-                    },
-                    error: function (err) {
-                      console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
-                      document.getElementById("test_table").innerHTML = ("AJAX error in request: " + JSON.stringify(err, null, 2));
-                    }
-                });
+                document.getElementById("modal-btn-close").click(); //simular modal close button press  
+                ListMedicos();
             }
         });
     });
 
-    //AJAX para mostrar dados on document ready
-    $.ajax({
-        url: "http://localhost:5000/v1/medicos/list",
-        dataType: 'json',
-        type: 'GET',
-        success: function(data) {
-            console.log(data);
+    //UPDATE medico
+    $("#update_form").submit(function (event){
+        event.preventDefault();
+        var formData = {
+            'action': 'updateMedico',
+            'data': $(this).serializeArray()
+        };
+        console.log(formData)
+        /*
+        $.ajax({
+            url: "<?php echo $path . "/toJson.php" ?>",
+            dataType: 'json',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                console.log('response tua ::', response );
 
-            var dataObject = [];
-            for (var med of data.data) {
-              var temp = { id: "", Nome: "", Morada: "", CodPostal: "", Email: "", Nif: "", DataNascimento: "", Datecreate: "", Datemodify: ""};
-
-              temp.id = med.id; 
-              temp.Nome = med.nome;
-              temp.Morada = med.morada;
-              temp.CodPostal = med.codpost;
-              temp.Email = med.email;
-              temp.Nif = med.nif;
-              temp.DataNascimento = med.datanascimento;
-              temp.Datecreate = med.datecreate;
-              temp.Datemodify = med.datemodify;
-
-              dataObject.push(temp);
+                document.getElementById("modal-btn-close").click(); //simular modal close button press  
+                ListMedicos();
             }
-            console.log(dataObject); 
-            document.getElementById("test_table").innerHTML = generateTable(dataObject);
-        },
-        error: function (err) {
-          console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
-          document.getElementById("test_table").innerHTML = ("AJAX error in request: " + JSON.stringify(err, null, 2));
-        }
+        });*/
     });
+
+     
+
+
+
+    //-- FUNCTIONS
+    //funçao AJAX para listar medicos
+    function ListMedicos(){
+      $.ajax({
+          url: "http://localhost:5000/v1/medicos/list",
+          dataType: 'json',
+          type: 'GET',
+          success: function(data) {
+              console.log(data);
+
+              var dataObject = [];
+              for (var med of data.data) {
+                var temp = { id: "", Nome: "", Morada: "", CodPostal: "", Email: "", Nif: "", DataNascimento: "", Datecreate: "", Datemodify: ""};
+
+                temp.id = med.id; 
+                temp.Nome = med.nome;
+                temp.Morada = med.morada;
+                temp.CodPostal = med.codpost;
+                temp.Email = med.email;
+                temp.Nif = med.nif;
+                temp.DataNascimento = med.datanascimento;
+                temp.Datecreate = med.datecreate;
+                temp.Datemodify = med.datemodify;
+
+                dataObject.push(temp);
+              }
+              console.log(dataObject); 
+              document.getElementById("test_table").innerHTML = generateTable(dataObject);
+          },
+          error: function (err) {
+            console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+            document.getElementById("test_table").innerHTML = ("AJAX error in request: " + JSON.stringify(err, null, 2));
+          }
+      });
+    };
+
+    //funçao AJAX para get medico pelo id
+    function getMedicoByID(medico_id){
+      $.ajax({
+          url: "http://localhost:5000/v1/medicos/" + medico_id,
+          dataType: 'json',
+          type: 'GET',
+          success: function(data) {
+              console.log(data);
+              return data;
+          },
+          error: function (err) {
+            console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+          }
+      });
+    };
+
+    var buttonUPDATE = document.getElementById("tbl_btn_update");
+    buttonUPDATE.addEventListener("click",function(e){
+        console.log(buttonUPDATE.value);
+    });
+
 
     //funcao generateTable medicos
     function generateTable(dataObject){
@@ -430,15 +468,15 @@
           mytable += `<td>` + CELL.DataNascimento + "</td>";
           mytable += `<td>` + CELL.Datecreate + "</td>";
           mytable += `<td>` + CELL.Datemodify + "</td>";
-          mytable += `<td><button type="submit" class="btn btn-warning" value="`+ CELL.id +`" id="btn-add">Editar</button></td>`;
-          mytable += `<td><button type="submit" class="btn btn-danger" value="`+ CELL.id +`" id="btn-add">Apagar</button></td>`;
+          mytable += `<td><button id="tbl_btn_update" value="`+ CELL.id +`" href="#updateModal" type="button" class="btn btn-warning" data-toggle="modal"><i class="material-icons"></i> <span>Editar</span></button></td>`;
+          mytable += `<td><button value="`+ CELL.id +`" href="#deleteModal" type="button" class="btn btn-danger" data-toggle="modal"><i class="material-icons"></i> <span>Apagar</span></button></td>`;
           mytable += "</tr>";
         }
         mytable += "</tbody>";
         mytable += "</table>";
 
         return mytable;
-    }
+    };
 });
 </script>
 
