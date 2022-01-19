@@ -419,8 +419,9 @@ function ListMedicos(){
 
           var dataObject = [];
           for (var med of data.data) {
-            var temp = {Nome: "", Morada: "", CodPostal: "", Email: "", Nif: "", DataNascimento: "", Datecreate: "", Datemodify: ""};
- 
+            var temp = {id: "", Nome: "", Morada: "", CodPostal: "", Email: "", Nif: "", DataNascimento: "", Datecreate: "", Datemodify: ""};
+            
+            temp.id = med.id;
             temp.Nome = med.nome;
             temp.Morada = med.morada;
             temp.CodPostal = med.codpost;
@@ -462,13 +463,13 @@ function getMedicoByID(medico_id){
 //funcao generateTable medicos
 function genTable(data){
   var keys = Object.keys(data[0]);
-              
+
   return `<table>
             <thead>
               ${keys.map(i=>`<th scope="col-s-auto">${i}</th>`).join('')}<th>Editar</th><th>Apagar</th>
             </thead>
             <tbody>
-              ${data.map(i=>`<tr>${keys.map(k => `<td>${i[k]}</td>`).join('')}<td><button id="tbl_btn_update" onclick="getMedicoByID(${i.id})" type="button" class="btn btn-warning" href="#updateModal" data-toggle="modal" ">update</button></td> <td><button type="button" class="btn btn-danger" href="#deleteModal" data-toggle="modal" onclick="delete_user(${i.id})">X</button></td>`).join('')}
+              ${data.map(i=>`<tr>${keys.map(k => `<td>${i[k]}</td>`).join('')}<td><button id="tbl_btn_update" onclick="getMedicoByID(${i.id})" type="button" class="btn btn-warning" href="#updateModal" data-toggle="modal" "><i class="bi bi-pencil-square"></i></button></td> <td><button type="button" class="btn btn-danger" href="#deleteModal" data-toggle="modal" onclick="delete_user(${i.id})"><i class="bi bi-trash"></i></button></td>`).join('')}
             </tbody>
           </table>`;
 };
