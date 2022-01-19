@@ -136,7 +136,7 @@
           <div class="card recent-sales">
             <div class="card-body">
             <h5 id="TEST-AJAX" class="card-title">Médicos no sistema</h5>
-              <table id="test_table" class="table table-borderless datatable">
+              <table id="test_table" class="table table-borderless "><!--datatable-->
                   <thead>
                     <!--<tr>
                     <th scope="col-s-auto">Nome</th>
@@ -349,7 +349,7 @@
             type: 'POST',
             data: formData,
             success: function(response) {
-                console.log('response tua ::', response );
+                console.log('response ::', response );
 
                 document.getElementById("modal-btn-close").click(); //simular modal close button press  
                 ListMedicos();
@@ -365,119 +365,128 @@
             'data': $(this).serializeArray()
         };
         console.log(formData)
-        /*
+
         $.ajax({
             url: "<?php echo $path . "/toJson.php" ?>",
             dataType: 'json',
             type: 'POST',
             data: formData,
             success: function(response) {
-                console.log('response tua ::', response );
+                console.log('response ::', response );
 
                 document.getElementById("modal-btn-close").click(); //simular modal close button press  
                 ListMedicos();
             }
-        });*/
+        });
     });
 
-     
+    //DELETE medico
+    $("#delete_form").submit(function (event){
+        event.preventDefault();
+        var formData = {
+            'action': 'deleteMedico',
+            'data': $(this).serializeArray()
+        };
+        console.log(formData)
 
+        $.ajax({
+            url: "<?php echo $path . "/toJson.php" ?>",
+            dataType: 'json',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                console.log('response ::', response );
 
-
-    //-- FUNCTIONS
-    //funçao AJAX para listar medicos
-    function ListMedicos(){
-      $.ajax({
-          url: "http://localhost:5000/v1/medicos/list",
-          dataType: 'json',
-          type: 'GET',
-          success: function(data) {
-              console.log(data);
-
-              var dataObject = [];
-              for (var med of data.data) {
-                var temp = { id: "", Nome: "", Morada: "", CodPostal: "", Email: "", Nif: "", DataNascimento: "", Datecreate: "", Datemodify: ""};
-
-                temp.id = med.id; 
-                temp.Nome = med.nome;
-                temp.Morada = med.morada;
-                temp.CodPostal = med.codpost;
-                temp.Email = med.email;
-                temp.Nif = med.nif;
-                temp.DataNascimento = med.datanascimento;
-                temp.Datecreate = med.datecreate;
-                temp.Datemodify = med.datemodify;
-
-                dataObject.push(temp);
-              }
-              console.log(dataObject); 
-              document.getElementById("test_table").innerHTML = generateTable(dataObject);
-          },
-          error: function (err) {
-            console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
-            document.getElementById("test_table").innerHTML = ("AJAX error in request: " + JSON.stringify(err, null, 2));
-          }
-      });
-    };
-
-    //funçao AJAX para get medico pelo id
-    function getMedicoByID(medico_id){
-      $.ajax({
-          url: "http://localhost:5000/v1/medicos/" + medico_id,
-          dataType: 'json',
-          type: 'GET',
-          success: function(data) {
-              console.log(data);
-              return data;
-          },
-          error: function (err) {
-            console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
-          }
-      });
-    };
-
-    var buttonUPDATE = document.getElementById("tbl_btn_update");
-    buttonUPDATE.addEventListener("click",function(e){
-        console.log(buttonUPDATE.value);
+                document.getElementById("modal-btn-close").click(); //simular modal close button press  
+                ListMedicos();
+            }
+        });
     });
-
-
-    //funcao generateTable medicos
-    function generateTable(dataObject){
-      var keys = Object.keys(dataObject[0]);
-        var mytable = `<table class="table table-borderless datatable">`;
-        mytable += "<thead>";
-        mytable += "<tr>";
-        for (var key of keys) {
-          mytable += `<th scope="col-s-auto">` + key + "</th>"; 
-        }
-        mytable += `<th scope="col-s-auto">` + "Editar" + "</th>";
-        mytable += `<th scope="col-s-auto">` + "Apagar" + "</th>";
-        mytable += "</tr>";
-        mytable += "</thead>";
-
-        mytable += "<tbody>";
-        for (var CELL of dataObject) {
-          mytable += "<tr>";
-          mytable += `<td>` + CELL.id + "</td>"; 
-          mytable += `<td>` + CELL.Nome + "</td>";
-          mytable += `<td>` + CELL.Morada + "</td>";
-          mytable += `<td>` + CELL.CodPostal + "</td>";
-          mytable += `<td>` + CELL.Email + "</td>";
-          mytable += `<td>` + CELL.Nif + "</td>";
-          mytable += `<td>` + CELL.DataNascimento + "</td>";
-          mytable += `<td>` + CELL.Datecreate + "</td>";
-          mytable += `<td>` + CELL.Datemodify + "</td>";
-          mytable += `<td><button id="tbl_btn_update" value="`+ CELL.id +`" href="#updateModal" type="button" class="btn btn-warning" data-toggle="modal"><i class="material-icons"></i> <span>Editar</span></button></td>`;
-          mytable += `<td><button value="`+ CELL.id +`" href="#deleteModal" type="button" class="btn btn-danger" data-toggle="modal"><i class="material-icons"></i> <span>Apagar</span></button></td>`;
-          mytable += "</tr>";
-        }
-        mytable += "</tbody>";
-        mytable += "</table>";
-
-        return mytable;
-    };
 });
+
+
+
+
+//-- FUNCTIONS
+//funçao AJAX para listar medicos
+function ListMedicos(){
+  $.ajax({
+      url: "http://localhost:5000/v1/medicos/list",
+      dataType: 'json',
+      type: 'GET',
+      success: function(data) {
+          console.log('ListMedicos ::', data);
+
+          var dataObject = [];
+          for (var med of data.data) {
+            var temp = {Nome: "", Morada: "", CodPostal: "", Email: "", Nif: "", DataNascimento: "", Datecreate: "", Datemodify: ""};
+ 
+            temp.Nome = med.nome;
+            temp.Morada = med.morada;
+            temp.CodPostal = med.codpost;
+            temp.Email = med.email;
+            temp.Nif = med.nif;
+            temp.DataNascimento = med.datanascimento;
+            temp.Datecreate = med.datecreate;
+            temp.Datemodify = med.datemodify;
+
+            dataObject.push(temp);
+          }
+          console.log('ListMedicos built array ::', dataObject); 
+          document.getElementById("test_table").innerHTML = genTable(dataObject);
+      },
+      error: function (err) {
+        console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+        document.getElementById("test_table").innerHTML = ("AJAX error in request: " + JSON.stringify(err, null, 2));
+      }
+  });
+};
+
+//funçao AJAX para get medico by id
+function getMedicoByID(medico_id){
+  $.ajax({
+      url: "http://localhost:5000/v1/medicos/" + medico_id,
+      dataType: 'json',
+      type: 'GET',
+      success: function(data) {
+          console.log('getMedicoByID ::', data);
+          DataToModal(data.data);
+      },
+      error: function (err) {
+        console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+        return ("AJAX error in request: " + JSON.stringify(err, null, 2));
+      }
+  });
+};
+
+//funcao generateTable medicos
+function genTable(data){
+  var keys = Object.keys(data[0]);
+              
+  return `<table>
+            <thead>
+              ${keys.map(i=>`<th scope="col-s-auto">${i}</th>`).join('')}<th>Editar</th><th>Apagar</th>
+            </thead>
+            <tbody>
+              ${data.map(i=>`<tr>${keys.map(k => `<td>${i[k]}</td>`).join('')}<td><button id="tbl_btn_update" onclick="getMedicoByID(${i.id})" type="button" class="btn btn-warning" href="#updateModal" data-toggle="modal" ">update</button></td> <td><button type="button" class="btn btn-danger" href="#deleteModal" data-toggle="modal" onclick="delete_user(${i.id})">X</button></td>`).join('')}
+            </tbody>
+          </table>`;
+};
+
+//funcao mostra dados do medico no modal update
+function DataToModal(med) {
+  console.log('DataToModal ::',med);
+  var Form = document.forms['update_form'];
+  Form.elements["id"].value = med[0].id;
+  Form.elements["name"].value = med[0].nome;
+  Form.elements["address"].value = med[0].morada;
+  Form.elements["codpostal"].value = med[0].codpost;
+  Form.elements["email"].value = med[0].email;
+  Form.elements["nif"].value = med[0].nif;
+  //falta telem, cedula
+  Form.elements["datanascimento"].value = med[0].datanascimento;
+  Form.elements["idEspecialidade"].value = med[0].id_especialidade;
+};
 </script>
 
 </body>

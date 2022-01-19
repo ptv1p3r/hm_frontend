@@ -30,18 +30,18 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
                 $data = $_POST['data'];
 
                 $dataObject = (object) array(
-                    'Nome' => $data[0]['value'],
-                    'Morada' => $data[1]['value'],
-                    'CodPostal' => $data[2]['value'],
-                    'Email' => $data[3]['value'],
-                    'Nif' => $data[4]['value'],
-                    'C.Profissional' => $data[5]['value'],
-                    'Telemovel' => $data[6]['value'],
-                    'DataNascimento' => $data[7]['value'],
-                    'IdEspecialidade' => $data[8]['value']
+                    'Nome' => $data[1]['value'],
+                    'Morada' => $data[2]['value'],
+                    'CodPostal' => $data[3]['value'],
+                    'Email' => $data[4]['value'],
+                    'Nif' => $data[5]['value'],
+                    'C.Profissional' => $data[6]['value'],
+                    'Telemovel' => $data[7]['value'],
+                    'DataNascimento' => $data[8]['value'],
+                    'IdEspecialidade' => $data[9]['value']
                 );
 
-                $result = callAPI("POST", "http://localhost:5000/v1/medicos/update/" . $ID, $dataObject);
+                $result = callAPI("POST", "http://localhost:5000/v1/medicos/update/" . $data[0]['value'], $dataObject);
                 echo json_encode($result);
             }
             break;
