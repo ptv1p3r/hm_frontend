@@ -1,3 +1,8 @@
+<?php
+  //get URL
+  $path = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
+  $path .=$_SERVER["SERVER_NAME"]. dirname($_SERVER["PHP_SELF"]);        
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -123,64 +128,84 @@
     <section class="section">
 
       <div class="container">
-      <div class="row"> 
-      <div class="col-12 mb-3">
-          <a href="#addClientModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Utente</span></a>
-          <p id="success"></p>
-            </div>
-      </div>
-        <!-- Recent medical appointments -->
-        <div class="col-12">
-          <div class="card recent-sales">
-            <div class="card-body">
-            <h5 class="card-title">Utentes no sistema</h5>
-              <th>
-                <table class="table table-borderless datatable">
+        <div class="row"> 
+          <div class="col-12 mb-3">
+              <a href="#addModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Utente</span></a>
+              <p id="success"></p>
+                </div>
+          </div>
+
+          <!-- TABLE -->
+          <div class="col-12">
+            <div class="card recent-sales">
+              <div class="card-body">
+              <h5 class="card-title">Utentes no sistema</h5>
+                <div class="row"> 
+                  <div id="liveAlert" class="col-12 mb-3">
+
+                  </div>
+                </div>
+                <table id="utentes_table" class="table table-borderless "><!--datatable-->
                   <thead>
-                    <tr>
-                      <th scope="col">Nº Utente</th>
-                      <th scope="col">Nome</th>
-                      <th scope="col">Morada</th>
-                      <th scope="col">Cidade</th>
-                      <th scope="col">Telemóvel</th>
-                    </tr>
                   </thead>
-                  <tbody id='dataCont'>
-                  
-                    <!-- html dados tabela -->
-              
-
-                  <!--   Fim html dados tabela -->
-
+                  <tbody>
                   </tbody>
                 </table>
+              </div>
             </div>
-          </div>
-        </div><!-- End Recent medical appointments -->
-      </div>
+          </div><!-- End TABLE -->
+        </div>
       </div>
 
     
 
 
       <!-- Add Modal HTML -->
-      <div id="addClientModal" class="modal fade">
+      <div id="addModal" class="modal fade">
         <div class="modal-dialog">
           <div class="modal-content">
-            <form id="user_form">
+            <form id="add_form">
               <div class="modal-header">
                 <h4 class="modal-title">Adicionar Utente</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button id="add-modal-btn-close" type="button" class="btn-close" data-dismiss="modal" aria-hidden="true"></button>
               </div>
               <div class="modal-body">
                 <div class="form-group">
                   <label>Nome</label>
-                  <input  id="name" name="name" class="form-control" required>
+                  <input type="text" id="name" name="name" class="form-control" required>
                 </div>
+                <div class="form-group">
+                  <label>Morada</label>
+                  <input type="text" id="address" name="address" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>CodPostal</label>
+                  <input type="text" id="codpostal" name="codpostal" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="text" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>Nif</label>
+                  <input type="text" id="nif" name="nif" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>Número utente</label>
+                  <input type="text" id="nmr_utente" name="nmr_utente" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>Telemóvel</label>
+                  <input type="text" id="phone" name="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>DataNascimento</label>
+                  <input type="text" id="datanascimento" name="datanascimento" class="form-control" required>
+                </div>
+              </div>
               <div class="modal-footer">
-                <input type="hidden" value="1" name="type">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-                <button type="button" class="btn btn-primary" id="btn-add">Adicionar</button>
+                <button type="submit" class="btn btn-primary" id="btn-add">Adicionar</button>
               </div>
             </form>
           </div>
@@ -189,38 +214,53 @@
 
 
 
-      <!-- Edit Modal HTML -->
-      <div id="editEmployeeModal" class="modal fade">
+      <!-- Update Modal HTML -->
+      <div id="updateModal" class="modal fade">
         <div class="modal-dialog">
           <div class="modal-content">
             <form id="update_form">
               <div class="modal-header">
-                <h4 class="modal-title">Edit User</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Editar Utente</h4>
+                <button id="update-modal-btn-close" type="button" class="btn-close" data-dismiss="modal" aria-hidden="true"></button>
               </div>
               <div class="modal-body">
-                <input type="hidden" id="id_u" name="id" class="form-control" required>
                 <div class="form-group">
-                  <label>Name</label>
-                  <input type="text" id="name_u" name="name" class="form-control" required>
+                    <label>Nome</label>
+                    <input type="hidden" id="id" name="id" class="form-control">
+                    <input type="text" id="name" name="name" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Morada</label>
+                    <input type="text" id="address" name="address" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>CodPostal</label>
+                    <input type="text" id="codpostal" name="codpostal" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" id="email" name="email" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Nif</label>
+                    <input type="text" id="nif" name="nif" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Número utente</label>
+                    <input type="text" id="nmr_utente" name="nmr_utente" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Telemóvel</label>
+                    <input type="text" id="phone" name="phone" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>DataNascimento</label>
+                    <input type="text" id="datanascimento" name="datanascimento" class="form-control" required>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label>Email</label>
-                  <input type="email" id="email_u" name="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label>PHONE</label>
-                  <input type="phone" id="phone_u" name="phone" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label>City</label>
-                  <input type="city" id="city_u" name="city" class="form-control" required>
-                </div>
-              </div>
               <div class="modal-footer">
-                <input type="hidden" value="2" name="type">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                <button type="button" class="btn btn-info" id="update">Update</button>
+                <button type="submit" class="btn btn-info" id="update">Guardar</button>
               </div>
             </form>
           </div>
@@ -230,23 +270,22 @@
 
 
       <!-- Delete Modal HTML -->
-      <div id="deleteEmployeeModal" class="modal fade">
+      <div id="deleteModal" class="modal fade">
         <div class="modal-dialog">
           <div class="modal-content">
-            <form>
-
+            <form id="delete_form">
               <div class="modal-header">
-                <h4 class="modal-title">Delete User</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Apagar Utente?</h4>
+                <button id="delete-modal-btn-close" type="button" class="btn-close" data-dismiss="modal" aria-hidden="true"></button>
               </div>
               <div class="modal-body">
-                <input type="hidden" id="id_d" name="id" class="form-control">
-                <p>Are you sure you want to delete these Records?</p>
-                <p class="text-warning"><small>This action cannot be undone.</small></p>
+                <input type="hidden" id="id" name="id" class="form-control">
+                <p id="delete_form_message"></p>
+                <p class="text-warning"><small>Depois de feito não pode voltar atráz.</small></p>
               </div>
               <div class="modal-footer">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                <button type="button" class="btn btn-danger" id="delete">Delete</button>
+                <button type="submit" class="btn btn-danger" id="delete">Apagar</button>
               </div>
             </form>
           </div>
@@ -281,11 +320,197 @@
 
   <!-- data-feather icons -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+  <script>feather.replace();</script>
 
-  <script>
-    feather.replace()
-  </script>
+<script>
+  $(document).ready(function() {
+
+    //call func to ajax list utentes
+    ListUtentes();
+
+    //CREATE
+    $("#add_form").submit(function (event){
+        event.preventDefault();
+        var formData = {
+            'action': 'addUtente',
+            'data': $(this).serializeArray()
+        };
+        console.log(formData)
+        
+        $.ajax({
+            url: "<?php echo $path . "/toJson.php" ?>",
+            dataType: 'json',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+              console.log('response ::', response );
+
+              document.getElementById("add-modal-btn-close").click(); //simular modal close button press  
+              ListUtentes();
+              alert(response,"info");
+            }
+        });
+    });
+
+    //UPDATE
+    $("#update_form").submit(function (event){
+        event.preventDefault();
+        var formData = {
+            'action': 'updateUtente',
+            'data': $(this).serializeArray()
+        };
+        console.log(formData)
+
+        $.ajax({
+            url: "<?php echo $path . "/toJson.php" ?>",
+            dataType: 'json',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+              console.log('response ::', response );
+
+              document.getElementById("update-modal-btn-close").click(); //simular modal close button press  
+              ListUtentes();
+              alert(response,"info");
+            }
+        });
+    });
+
+    //DELETE
+    $("#delete_form").submit(function (event){
+        event.preventDefault();
+        var formData = {
+            'action': 'deleteUtente',
+            'data': $(this).serializeArray()
+        };
+        console.log(formData)
+
+        $.ajax({
+            url: "<?php echo $path . "/toJson.php" ?>",
+            dataType: 'json',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+              console.log('response ::', response );
+
+              document.getElementById("delete-modal-btn-close").click(); //simular modal close button press  
+              ListUtentes();
+              alert(response,"info");
+            }
+        });
+    });
+});
+
+
+
+
+//-- FUNCTIONS
+//funçao AJAX para listar utentes
+function ListUtentes(){
+  $.ajax({
+      url: "http://localhost:5000/v1/utentes/list",
+      dataType: 'json',
+      type: 'GET',
+      success: function(data) {
+          console.log('ListUtentes ::', data);
+
+          var dataObject = [];
+          for (var med of data.data) {
+            var temp = {id: "", Nome: "", Morada: "", CodPostal: "", Email: "", Nif: "", DataNascimento: "", Datecreate: "", Datemodify: ""};
+            
+            temp.id = med.id;
+            temp.Nome = med.nome;
+            temp.Morada = med.morada;
+            temp.CodPostal = med.codpost;
+            temp.Email = med.email;
+            temp.Nif = med.nif;
+            temp.DataNascimento = med.datanascimento;
+            temp.Datecreate = med.datecreate;
+            temp.Datemodify = med.datemodify;
+
+            dataObject.push(temp);
+          }
+          console.log('ListUtentes built array ::', dataObject); 
+          document.getElementById("utentes_table").innerHTML = genTable(dataObject);
+      },
+      error: function (err) {
+        console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+        document.getElementById("utentes_table").innerHTML = ("AJAX error in request: " + JSON.stringify(err.responseJSON["message"], null, 2));
+      }
+  });
+};
+
+//funçao AJAX para get utente by id
+function getUtenteByID(id){
+  $.ajax({
+      url: "http://localhost:5000/v1/utentes/" + id,
+      dataType: 'json',
+      type: 'GET',
+      success: function(data) {
+          console.log('getMedicoByID ::', data);
+          DataToModal(data.data);
+      },
+      error: function (err) {
+        console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+      }
+  });
+};
+
+
+//funcao delete utente
+function deleteUtenteByID(id){
+  var Form = document.forms['delete_form'];
+  Form.elements["id"].value = id;
+
+  document.getElementById("delete_form_message").innerHTML = "Deseja apagar utente nº"+ id;
+};
+
+//funcao generateTable utentes
+function genTable(data){
+  var keys = Object.keys(data[0]);
+
+  return `<table>
+            <thead>
+              ${keys.map(i=>`<th scope="col-s-auto">${i}</th>`).join('')}<th>Editar</th><th>Apagar</th>
+            </thead>
+            <tbody>
+              ${data.map(i=>`<tr>${keys.map(k => `<td>${i[k]}</td>`).join('')}<td><button id="tbl_btn_update" onclick="getUtenteByID(${i.id})" type="button" class="btn btn-warning" href="#updateModal" data-toggle="modal" "><i class="bi bi-pencil-square"></i></button></td> <td><button type="button" class="btn btn-danger" href="#deleteModal" data-toggle="modal" onclick="deleteUtenteByID(${i.id})"><i class="bi bi-trash"></i></button></td>`).join('')}
+            </tbody>
+          </table>`;
+};
+
+//funcao mostra dados do utente no modal update
+function DataToModal(data) {
+  console.log('DataToModal ::',data);
+  var Form = document.forms['update_form'];
+  Form.elements["id"].value = data[0].id;
+  Form.elements["name"].value = data[0].nome;
+  Form.elements["address"].value = data[0].morada;
+  Form.elements["codpostal"].value = data[0].codpost;
+  Form.elements["email"].value = data[0].email;
+  Form.elements["nif"].value = data[0].nif;
+  Form.elements["nmr_utente"].value = data[0].nmr_utente;
+  //falta telem
+  /*
+  Form.elements["phone"].value = data[0].telemovel;
+  */
+  Form.elements["datanascimento"].value = data[0].datanascimento;
+};
+
+//mensagem alerta para CRUD
+var alertPlaceholder = document.getElementById('liveAlert')
+function alert(message, type) {
+  var wrapper = document.createElement('div')
+  wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" role="alert"></button></div>'
+
+  alertPlaceholder.append(wrapper)
+  
+  // timeout alert message
+  setTimeout(function () {
+    $(".alert").remove()
+  }, 3000);
+}
+</script>
 
 </body>
-
 </html>
