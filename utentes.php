@@ -103,7 +103,6 @@
           <span>Consultas</span>
         </a>
       </li><!-- End Consultas Page Nav -->
-
       <li class="nav-item">
         <a class="nav-link " href="utentes.php">
           <i class="bi bi-person"></i>
@@ -112,10 +111,16 @@
       </li><!-- End Clientes Page Nav -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="medicos.php">
-          <i class="bi bi-activity"></i>
+          <i class="bi bi-person"></i>
           <span>Médicos</span>
         </a>
       </li><!-- End Médicos Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="especialidades.php">
+          <i class="bi bi-activity"></i>
+          <span>Especialidades</span>
+        </a>
+      </li><!-- End Especialidades Page Nav -->
     </ul>
   </aside><!-- End Sidebar-->
 
@@ -318,14 +323,11 @@
   <script src="static/js/main.js"></script>
   <script src="static/js/user.js"></script>
 
-  <!-- data-feather icons -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
-  <script>feather.replace();</script>
 
 <script>
   $(document).ready(function() {
 
-    //call func to ajax list utentes
+    //call func to ajax list
     ListUtentes();
 
     //CREATE
