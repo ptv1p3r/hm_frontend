@@ -123,39 +123,33 @@
     <section class="section">
  
       <div class="container">
-      <div class="row"> 
-      <div class="col-12 mb-3">
-          <a href="#addModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Médico</span></a>
-          <p id="success"></p>
-            </div>
-      </div>
+        <div class="row"> 
+          <div class="col-12 mb-3">
+              <a href="#addModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Adicionar Médico</span></a>
+              <p id="success"></p>
+                </div>
+          </div>
 
-   
-        <!-- Recent medical appointments -->
-        <div class="col-12">
-          <div class="card recent-sales">
-            <div class="card-body">
-            <h5 id="TEST-AJAX" class="card-title">Médicos no sistema</h5>
-              <table id="test_table" class="table table-borderless "><!--datatable-->
+          <!-- TABLE -->
+          <div class="col-12">
+            <div class="card recent-sales">
+              <div class="card-body">
+              <h5 class="card-title">Médicos no sistema</h5>
+                <div class="row"> 
+                  <div id="liveAlert" class="col-12 mb-3">
+
+                  </div>
+                </div>
+                <table id="medicos_table" class="table table-borderless "><!--datatable-->
                   <thead>
-                    <!--<tr>
-                    <th scope="col-s-auto">Nome</th>
-                    <th scope="col-s-auto">Morada</th>
-                    <th scope="col-s-auto">CodPostal</th>
-                    <th scope="col-s-auto">Email</th>
-                    <th scope="col-s-auto">Nif</th> 
-                    <th scope="col-s-auto">C.Profissional</th>
-                    <th scope="col-s-auto">Telemovel</th>
-                    <th scope="col-s-auto">DataNascimento</th>
-                  </tr>-->
                   </thead>
                   <tbody>
                   </tbody>
-              </table>
+                </table>
+              </div>
             </div>
-          </div>
-        </div><!-- End Recent medical appointments -->
-      </div>
+          </div><!-- End TABLE -->
+        </div>
       </div>
 
     
@@ -168,7 +162,7 @@
             <form id="add_form">
               <div class="modal-header">
                 <h4 class="modal-title">Adicionar Médico</h4>
-                <button id="modal-btn-close" type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <button id="add-modal-btn-close" type="button" class="btn-close" data-dismiss="modal" aria-hidden="true"></button>
               </div>
               <div class="modal-body">
                 <div class="form-group">
@@ -205,6 +199,9 @@
                 </div>
                 <div class="form-group">
                   <label>Especialidade</label>
+                  <!--<select id="idEspecialidade" name="idEspecialidade" class="form-select" aria-label="Disabled select example" required>
+                    <option selected>Open this select menu</option>
+                  </select>-->
                   <input type="text" id="idEspecialidade" name="idEspecialidade" class="form-control" required>
                 </div>
               </div>
@@ -225,7 +222,7 @@
             <form id="update_form">
               <div class="modal-header">
                 <h4 class="modal-title">Editar Médico</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <button id="update-modal-btn-close" type="button" class="btn-close" data-dismiss="modal" aria-hidden="true"></button>
               </div>
               <div class="modal-body">
                 <div class="form-group">
@@ -263,6 +260,9 @@
                   </div>
                   <div class="form-group">
                     <label>Especialidade</label>
+                    <!--<select id="idEspecialidade" name="idEspecialidade" class="form-select" aria-label="Disabled select example" required>
+                    <option selected>Open this select menu</option>
+                  </select>-->
                     <input type="text" id="idEspecialidade" name="idEspecialidade" class="form-control" required>
                   </div>
                 </div>
@@ -282,17 +282,17 @@
           <div class="modal-content">
             <form id="delete_form">
               <div class="modal-header">
-                <h4 class="modal-title">Delete User</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title">Apagar Médico?</h4>
+                <button id="delete-modal-btn-close" type="button" class="btn-close" data-dismiss="modal" aria-hidden="true"></button>
               </div>
               <div class="modal-body">
-                <input type="hidden" id="id_d" name="id" class="form-control">
-                <p>Are you sure you want to delete these Records?</p>
-                <p class="text-warning"><small>This action cannot be undone.</small></p>
+                <input type="hidden" id="id" name="id" class="form-control">
+                <p id="delete_form_message"></p>
+                <p class="text-warning"><small>Depois de feito não pode voltar atráz.</small></p>
               </div>
               <div class="modal-footer">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                <button type="submit" class="btn btn-danger" id="delete">Delete</button>
+                <button type="submit" class="btn btn-danger" id="delete">Apagar</button>
               </div>
             </form>
           </div>
@@ -331,10 +331,11 @@
 <script>
   $(document).ready(function() {
 
-    //call func to ajax list medicos
+    //call func to ajax list medicos e especialidades
     ListMedicos();
+    //ListEspecialidades()
 
-    //CREATE medico
+    //CREATE
     $("#add_form").submit(function (event){
         event.preventDefault();
         var formData = {
@@ -349,15 +350,16 @@
             type: 'POST',
             data: formData,
             success: function(response) {
-                console.log('response ::', response );
+              console.log('response ::', response );
 
-                document.getElementById("modal-btn-close").click(); //simular modal close button press  
-                ListMedicos();
+              document.getElementById("add-modal-btn-close").click(); //simular modal close button press  
+              ListMedicos();
+              alert(response,"info");
             }
         });
     });
 
-    //UPDATE medico
+    //UPDATE
     $("#update_form").submit(function (event){
         event.preventDefault();
         var formData = {
@@ -372,15 +374,16 @@
             type: 'POST',
             data: formData,
             success: function(response) {
-                console.log('response ::', response );
+              console.log('response ::', response );
 
-                document.getElementById("modal-btn-close").click(); //simular modal close button press  
-                ListMedicos();
+              document.getElementById("update-modal-btn-close").click(); //simular modal close button press  
+              ListMedicos();
+              alert(response,"info");
             }
         });
     });
 
-    //DELETE medico
+    //DELETE
     $("#delete_form").submit(function (event){
         event.preventDefault();
         var formData = {
@@ -395,10 +398,11 @@
             type: 'POST',
             data: formData,
             success: function(response) {
-                console.log('response ::', response );
+              console.log('response ::', response );
 
-                document.getElementById("modal-btn-close").click(); //simular modal close button press  
-                ListMedicos();
+              document.getElementById("delete-modal-btn-close").click(); //simular modal close button press  
+              ListMedicos();
+              alert(response,"info");
             }
         });
     });
@@ -434,11 +438,42 @@ function ListMedicos(){
             dataObject.push(temp);
           }
           console.log('ListMedicos built array ::', dataObject); 
-          document.getElementById("test_table").innerHTML = genTable(dataObject);
+          document.getElementById("medicos_table").innerHTML = genTable(dataObject);
       },
       error: function (err) {
         console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
-        document.getElementById("test_table").innerHTML = ("AJAX error in request: " + JSON.stringify(err, null, 2));
+        document.getElementById("medicos_table").innerHTML = ("AJAX error in request: " + JSON.stringify(err.responseJSON["message"], null, 2));
+      }
+  });
+};
+
+//funçao AJAX para listar especialidades
+function ListEspecialidades(){
+  $.ajax({
+      url: "http://localhost:5000/v1/especialidades/list",
+      dataType: 'json',
+      type: 'GET',
+      success: function(data) {
+          console.log('ListEspecialidades ::', data);
+
+          var dataObject = [];
+          for (var med of data.data) {
+            var temp = {id: "", Nome: ""};
+            
+            temp.id = med.id;
+            temp.Nome = med.nome;
+
+            dataObject.push(temp);
+          }
+          console.log('ListEspecialidades built array ::', dataObject); 
+          
+          var select = document.getElementById("idEspecialidade");
+          for(index in dataObject) {
+              select.options[select.options.length] = new Option(dataObject[index].nome, dataObject[index].id);
+          }
+      },
+      error: function (err) {
+        console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
       }
   });
 };
@@ -455,9 +490,17 @@ function getMedicoByID(medico_id){
       },
       error: function (err) {
         console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
-        return ("AJAX error in request: " + JSON.stringify(err, null, 2));
       }
   });
+};
+
+
+//funcao delete medico
+function deleteMedicoByID(medico_id){
+  var Form = document.forms['delete_form'];
+  Form.elements["id"].value = medico_id;
+
+  document.getElementById("delete_form_message").innerHTML = "Deseja apagar medico nº"+ medico_id;
 };
 
 //funcao generateTable medicos
@@ -469,7 +512,7 @@ function genTable(data){
               ${keys.map(i=>`<th scope="col-s-auto">${i}</th>`).join('')}<th>Editar</th><th>Apagar</th>
             </thead>
             <tbody>
-              ${data.map(i=>`<tr>${keys.map(k => `<td>${i[k]}</td>`).join('')}<td><button id="tbl_btn_update" onclick="getMedicoByID(${i.id})" type="button" class="btn btn-warning" href="#updateModal" data-toggle="modal" "><i class="bi bi-pencil-square"></i></button></td> <td><button type="button" class="btn btn-danger" href="#deleteModal" data-toggle="modal" onclick="delete_user(${i.id})"><i class="bi bi-trash"></i></button></td>`).join('')}
+              ${data.map(i=>`<tr>${keys.map(k => `<td>${i[k]}</td>`).join('')}<td><button id="tbl_btn_update" onclick="getMedicoByID(${i.id})" type="button" class="btn btn-warning" href="#updateModal" data-toggle="modal" "><i class="bi bi-pencil-square"></i></button></td> <td><button type="button" class="btn btn-danger" href="#deleteModal" data-toggle="modal" onclick="deleteMedicoByID(${i.id})"><i class="bi bi-trash"></i></button></td>`).join('')}
             </tbody>
           </table>`;
 };
@@ -485,9 +528,28 @@ function DataToModal(med) {
   Form.elements["email"].value = med[0].email;
   Form.elements["nif"].value = med[0].nif;
   //falta telem, cedula
+  /*
+  Form.elements["phone"].value = med[0].telemovel;
+  Form.elements["cprofissional"].value = med[0].cprofissional;
+  */
   Form.elements["datanascimento"].value = med[0].datanascimento;
   Form.elements["idEspecialidade"].value = med[0].id_especialidade;
 };
+
+
+//mensagem alerta para CRUD
+var alertPlaceholder = document.getElementById('liveAlert')
+function alert(message, type) {
+  var wrapper = document.createElement('div')
+  wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" role="alert"></button></div>'
+
+  alertPlaceholder.append(wrapper)
+  
+  // timeout alert message
+  setTimeout(function () {
+    $(".alert").remove()
+  }, 3000);
+}
 </script>
 
 </body>
