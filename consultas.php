@@ -1,3 +1,8 @@
+<?php
+  //get URL
+  $path = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
+  $path .=$_SERVER["SERVER_NAME"]. dirname($_SERVER["PHP_SELF"]);        
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -120,98 +125,70 @@
       <div class="container">
         <div class="row"> 
           <div class="col-12 mb-3">
-              <a href="#addEmployeeModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Criar Consulta</span></a>
+              <a href="#addModal" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i> <span>Nova Consulta</span></a>
               <p id="success"></p>
           </div>
         </div>
-        <!-- Recent medical appointments -->
+        <!-- TABLE -->
         <div class="col-12">
-          <div class="card recent-sales">
-            <div class="card-body">
-            <h5 class="card-title">Consultas criadas</h5>
-              <th>
-                <table class="table table-borderless datatable">
+            <div class="card recent-sales">
+              <div class="card-body">
+              <h5 class="card-title">Consultas no sistema</h5>
+                <div class="row"> 
+                  <div id="liveAlert" class="col-12 mb-3">
+
+                  </div>
+                </div>
+                <table id="consultas_table" class="table table-borderless "><!--datatable-->
                   <thead>
-                    <tr>
-                      <th scope="col">Nº Utente</th>
-                      <th scope="col">Nome</th>
-                      <th scope="col">Morada</th>
-                      <th scope="col">Cidade</th>
-                      <th scope="col">Telemóvel</th>
-                      <th scope="col">Opções</th>
-                    </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row"><a href="#">#100</a></th>
-                      <td><a href="#" class="text-primary">Denis Botnaru</a></td>
-                      <td><a href="#" class="text-primary"> Rua das carochas, n5</a></td>
-                      <td><a href="#" class="date text-primary">Portimão</a></td>
-                      <td><a href="#" class="date text-primary">961111222</a></td>
-                      <td><a href="#"><i class="size-26" data-feather="edit"></i></a>
-                          <a href="#"><i class="size-26" data-feather="eye"></i></a>
-                          <a href="#"><i class="size-26" data-feather="x"></i></a> </td>
-
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#">#101</a></th>
-                      <td><a href="#" class="text-primary">Joaquim Roscas</a></td>
-                      <td><a class="text-primary"> Rua das carochas, n5</a></td>
-                      <td><a class="text-primary">Portimão</a></td>
-                      <td><a class="text-primary">961111222</a></td>
-                    </tr>
-
-                    <!-- html dados tabela -->
-
-             
-
-                  <!--   Fim html dados tabela -->
-
                   </tbody>
                 </table>
+              </div>
             </div>
-          </div>
-        </div><!-- End Recent medical appointments -->
-      </div>
+          </div><!-- End TABLE -->
+        </div>
       </div>
 
     
 
-
       <!-- Add Modal HTML -->
-      <div id="addEmployeeModal" class="modal fade">
+      <div id="addModal" class="modal fade">
         <div class="modal-dialog">
           <div class="modal-content">
-            <form id="user_form">
+            <form id="add_form">
               <div class="modal-header">
                 <h4 class="modal-title">Criar Consulta</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button id="add-modal-btn-close" type="button" class="btn-close" data-dismiss="modal" aria-hidden="true"></button>
               </div>
               <div class="modal-body">
-                <form>
                 <div class="form-group">
-                  <label>Nome</label>
-                  <input type="text" id="name" name="name" class="form-control" required>
+                  <label>Descrição</label>
+                  <input type="text" id="descricao" name="descricao" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label>EMAIL</label>
-                  <input type="email" id="email" name="email" class="form-control" required>
+                  <label>Utente</label>
+                  <!--<select id="id_utente" name="id_utente" class="form-select" aria-label="Disabled select example" required>
+                    <option selected>Open this select menu</option>
+                  </select>-->
+                  <input type="text" id="id_utente" name="id_utente" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label>PHONE</label>
-                  <input type="phone" id="phone" name="phone" class="form-control" required>
+                  <label>Medico</label>
+                  <!--<select id="id_medico" name="id_medico" class="form-select" aria-label="Disabled select example" required>
+                    <option selected>Open this select menu</option>
+                  </select>-->
+                  <input type="text" id="id_medico" name="id_medico" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label>CITY</label>
-                  <input type="city" id="city" name="city" class="form-control" required>
+                  <label>Data da consulta</label>
+                  <input type="text" id="dataconsulta" name="dataconsulta" class="form-control" required>
                 </div>
-              </form>
               </div>
-            
               <div class="modal-footer">
-                <input type="hidden" value="1" name="type">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-                <button type="button" onclick="insert();" class="btn btn-primary" id="btn-add">Adicionar</button>
+                <button type="submit" class="btn btn-primary" id="btn-add">Adicionar</button>
               </div>
             </form>
           </div>
@@ -220,38 +197,43 @@
 
 
 
-      <!-- Edit Modal HTML -->
-      <div id="editEmployeeModal" class="modal fade">
+      <!-- Update Modal HTML -->
+      <div id="updateModal" class="modal fade">
         <div class="modal-dialog">
           <div class="modal-content">
             <form id="update_form">
               <div class="modal-header">
-                <h4 class="modal-title">Edit User</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Editar Consulta</h4>
+                <button id="update-modal-btn-close" type="button" class="btn-close" data-dismiss="modal" aria-hidden="true"></button>
               </div>
               <div class="modal-body">
-                <input type="hidden" id="id_u" name="id" class="form-control" required>
                 <div class="form-group">
-                  <label>Name</label>
-                  <input type="text" id="name_u" name="name" class="form-control" required>
+                    <label>Descrição</label>
+                    <input type="hidden" id="id" name="id" class="form-control">
+                    <input type="text" id="descricao" name="descricao" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Utente</label>
+                    <!--<select id="id_utente" name="id_utente" class="form-select" aria-label="Disabled select example" required>
+                    <option selected>Open this select menu</option>
+                  </select>-->
+                    <input type="text" id="id_utente" name="id_utente" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Medico</label>
+                    <!--<select id="id_medico" name="id_medico" class="form-select" aria-label="Disabled select example" required>
+                    <option selected>Open this select menu</option>
+                  </select>-->
+                    <input type="text" id="id_medico" name="id_medico" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Data da consulta</label>
+                    <input type="text" id="dataconsulta" name="dataconsulta" class="form-control" required>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label>Email</label>
-                  <input type="email" id="email_u" name="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label>PHONE</label>
-                  <input type="phone" id="phone_u" name="phone" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label>City</label>
-                  <input type="city" id="city_u" name="city" class="form-control" required>
-                </div>
-              </div>
               <div class="modal-footer">
-                <input type="hidden" value="2" name="type">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                <button type="button" class="btn btn-info" id="update">Update</button>
+                <button type="submit" class="btn btn-info" id="update">Guardar</button>
               </div>
             </form>
           </div>
@@ -261,23 +243,22 @@
 
 
       <!-- Delete Modal HTML -->
-      <div id="deleteEmployeeModal" class="modal fade">
+      <div id="deleteModal" class="modal fade">
         <div class="modal-dialog">
           <div class="modal-content">
-            <form>
-
+            <form id="delete_form">
               <div class="modal-header">
-                <h4 class="modal-title">Delete User</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Apagar Consulta?</h4>
+                <button id="delete-modal-btn-close" type="button" class="btn-close" data-dismiss="modal" aria-hidden="true"></button>
               </div>
               <div class="modal-body">
-                <input type="hidden" id="id_d" name="id" class="form-control">
-                <p>Are you sure you want to delete these Records?</p>
-                <p class="text-warning"><small>This action cannot be undone.</small></p>
+                <input type="hidden" id="id" name="id" class="form-control">
+                <p id="delete_form_message"></p>
+                <p class="text-warning"><small>Depois de feito não pode voltar atráz.</small></p>
               </div>
               <div class="modal-footer">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                <button type="button" class="btn btn-danger" id="delete">Delete</button>
+                <button type="submit" class="btn btn-danger" id="delete">Apagar</button>
               </div>
             </form>
           </div>
@@ -311,28 +292,253 @@
   <script src="static/js/user.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
 
-    <!-- data-feather icons -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+<!-- data-feather icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+<script> feather.replace(); </script>
 
-    <script>
+<script>
+  $(document).ready(function() {
 
-      feather.replace()
+    //call func to ajax list consultas
+    ListConsultas();
 
-      //ideia AJAX para mostrar dados on document ready
-      $(document).ready(function() {
+    //CREATE
+    $("#add_form").submit(function (event){
+        event.preventDefault();
+        var formData = {
+            'action': 'addConsulta',
+            'data': $(this).serializeArray()
+        };
+        console.log(formData)
+        
         $.ajax({
-          url: "http://localhost:5000/v1/consultas/list",
-          dataType: 'json',
-          type: 'GET',
-          success: function(data) {
-              console.log(data);
-              $('#TEST-AJAX').html(data.message);
-              //document.getElementById("TEST-H5-AJAX").innerHTML = data.message
-          }
+            url: "<?php echo $path . "/toJson.php" ?>",
+            dataType: 'json',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+              console.log('response ::', response );
+
+              document.getElementById("add-modal-btn-close").click(); //simular modal close button press  
+              ListConsultas();
+              alert(response,"info");
+            }
         });
-      });
-    </script>
+    });
+
+    //UPDATE
+    $("#update_form").submit(function (event){
+        event.preventDefault();
+        var formData = {
+            'action': 'updateConsulta',
+            'data': $(this).serializeArray()
+        };
+        console.log(formData)
+
+        $.ajax({
+            url: "<?php echo $path . "/toJson.php" ?>",
+            dataType: 'json',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+              console.log('response ::', response );
+
+              document.getElementById("update-modal-btn-close").click(); //simular modal close button press  
+              ListConsultas();
+              alert(response,"info");
+            }
+        });
+    });
+
+    //DELETE
+    $("#delete_form").submit(function (event){
+        event.preventDefault();
+        var formData = {
+            'action': 'deleteConsulta',
+            'data': $(this).serializeArray()
+        };
+        console.log(formData)
+
+        $.ajax({
+            url: "<?php echo $path . "/toJson.php" ?>",
+            dataType: 'json',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+              console.log('response ::', response);
+
+              document.getElementById("delete-modal-btn-close").click(); //simular modal close button press  
+              ListConsultas();
+              alert(response,"info");
+            }
+        });
+    });
+});
+
+
+
+
+//-- FUNCTIONS
+//funçao AJAX para listar medicos
+function ListConsultas(){
+  $.ajax({
+      url: "http://localhost:5000/v1/consultas/list",
+      dataType: 'json',
+      type: 'GET',
+      success: function(data) {
+          console.log('ListConsultas ::', data);
+
+          var dataObject = [];
+          for (var med of data.data) {
+            var temp = {id: "", Descricao: "", IdUtente: "", IdMedico: "", DataConsulta: ""};
+            
+            temp.id = med.id;
+            temp.Descricao = med.descricao;
+            temp.IdUtente = med.id_utente;
+            temp.IdMedico = med.id_medico;
+            temp.DataConsulta = med.dataconsulta;
+
+            dataObject.push(temp);
+          }
+          console.log('ListConsultas built array ::', dataObject); 
+          document.getElementById("consultas_table").innerHTML = genTable(dataObject);
+      },
+      error: function (err) {
+        console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+        document.getElementById("consultas_table").innerHTML = ("AJAX error in request: " + JSON.stringify(err.responseJSON["message"], null, 2));
+      }
+  });
+};
+
+//funçao AJAX para listar medicos
+function ListMedicos(){
+  $.ajax({
+      url: "http://localhost:5000/v1/medicos/list",
+      dataType: 'json',
+      type: 'GET',
+      success: function(data) {
+          console.log('ListMedicos ::', data);
+
+          var dataObject = [];
+          for (var med of data.data) {
+            var temp = {id: "", Nome: ""};
+            
+            temp.id = med.id;
+            temp.Nome = med.nome;
+
+            dataObject.push(temp);
+          }
+          console.log('ListMedicos built array ::', dataObject); 
+          
+          var select = document.getElementById("idEspecialidade");
+          for(index in dataObject) {
+              select.options[select.options.length] = new Option(dataObject[index].nome, dataObject[index].id);
+          }
+      },
+      error: function (err) {
+        console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+      }
+  });
+};
+
+//funçao AJAX para listar utentes
+function ListUtentes(){
+  $.ajax({
+      url: "http://localhost:5000/v1/utentes/list",
+      dataType: 'json',
+      type: 'GET',
+      success: function(data) {
+          console.log('ListUtentes ::', data);
+
+          var dataObject = [];
+          for (var med of data.data) {
+            var temp = {id: "", Nome: ""};
+            
+            temp.id = med.id;
+            temp.Nome = med.nome;
+
+            dataObject.push(temp);
+          }
+          console.log('ListUtentes built array ::', dataObject); 
+          
+          var select = document.getElementById("idEspecialidade");
+          for(index in dataObject) {
+              select.options[select.options.length] = new Option(dataObject[index].nome, dataObject[index].id);
+          }
+      },
+      error: function (err) {
+        console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+      }
+  });
+};
+
+//funçao AJAX para get consulta by id
+function getConsultaByID(id){
+  $.ajax({
+      url: "http://localhost:5000/v1/consultas/" + id,
+      dataType: 'json',
+      type: 'GET',
+      success: function(data) {
+          console.log('getMedicoByID ::', data);
+          DataToModal(data.data);
+      },
+      error: function (err) {
+        console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+      }
+  });
+};
+
+
+//funcao delete consulta
+function deleteConsultaByID(id){
+  var Form = document.forms['delete_form'];
+  Form.elements["id"].value = id;
+
+  document.getElementById("delete_form_message").innerHTML = "Deseja apagar consulta nº"+ id;
+};
+
+//funcao generateTable consulta
+function genTable(data){
+  var keys = Object.keys(data[0]);
+
+  return `<table>
+            <thead>
+              ${keys.map(i=>`<th scope="col-s-auto">${i}</th>`).join('')}<th>Editar</th><th>Apagar</th>
+            </thead>
+            <tbody>
+              ${data.map(i=>`<tr>${keys.map(k => `<td>${i[k]}</td>`).join('')}<td><button id="tbl_btn_update" onclick="getConsultaByID(${i.id})" type="button" class="btn btn-warning" href="#updateModal" data-toggle="modal" "><i class="bi bi-pencil-square"></i></button></td> <td><button type="button" class="btn btn-danger" href="#deleteModal" data-toggle="modal" onclick="deleteConsultaByID(${i.id})"><i class="bi bi-trash"></i></button></td>`).join('')}
+            </tbody>
+          </table>`;
+};
+
+//funcao mostra dados da consulta no modal update
+function DataToModal(data) {
+  console.log('DataToModal ::', data);
+  var Form = document.forms['update_form'];
+  Form.elements["id"].value = data[0].id;
+  Form.elements["descricao"].value = data[0].descricao;
+  Form.elements["id_utente"].value = data[0].id_utente;
+  Form.elements["id_medico"].value = data[0].id_medico;
+  Form.elements["dataconsulta"].value = data[0].dataconsulta;
+};
+
+
+//mensagem alerta para CRUD
+var alertPlaceholder = document.getElementById('liveAlert')
+function alert(content, type) {
+  var wrapper = document.createElement('div')
+  wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + content + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" role="alert"></button></div>'
+
+  alertPlaceholder.append(wrapper)
+  
+  // timeout alert message
+  setTimeout(function () {
+    $(".alert").remove()
+  }, 3000);
+}
+
+
+</script>
 
 </body>
-
 </html>
