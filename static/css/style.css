@@ -6,10 +6,10 @@
 */
 
 /*--------------------------------------------------------------
-#CUSTOM
+# CUSTOM
 --------------------------------------------------------------*/
 
-/*clinica.php*/
+/*------------------- clinica.php*/
 .size-32 {
   width: 32px;
   height: 32px;
@@ -36,8 +36,9 @@
   border-top: 1px solid #cddfff;
   text-align: center;
 }
+/*------------------- FIM clinica.php*/
 
-/*GOOGLE MAP*/
+/*------------------- GOOGLE MAP*/
 .map-container-2{
   height:350px;
 }
@@ -49,10 +50,14 @@
   width:100%;
   padding-top: 20px;
 }
-/*FIM - GOOGLE MAP*/
+/*------------------- FIM GOOGLE MAP*/
 
 
-
+/*------------------- PAGE MODALS CLOSE BUTTON*/
+form .btn-close {
+  background-size: 1rem !important;
+}
+/*------------------- FIM PAGE MODALS CLOSE BUTTON*/
 
 
 
