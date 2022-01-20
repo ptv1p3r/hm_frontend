@@ -449,7 +449,7 @@ function getUtenteByID(id){
       dataType: 'json',
       type: 'GET',
       success: function(data) {
-          console.log('getMedicoByID ::', data);
+          console.log('getUtenteByID ::', data);
           DataToModal(data.data);
       },
       error: function (err) {
