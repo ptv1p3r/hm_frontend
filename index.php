@@ -39,10 +39,10 @@ session_start();
 </head>
 
 <body>
-  <?php
+<?php
   $site_header_name = 'Consultas LDA';
   $user_name = 'admin';
-  ?>
+?>
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
@@ -85,42 +85,46 @@ session_start();
         </li>
       </ul><!-- End Profile Dropdown Items -->
     </li><!-- End Profile Nav -->
-
   </ul>
 </nav><!-- End Icons Navigation -->
-
 </header><!-- End Header -->
+
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
-    <ul class="sidebar-nav" id="sidebar-nav">
-      <li class="nav-item">
-        <a class="nav-link " href="index.php">
-          <i class="bi bi-grid"></i>
-          <span>Página principal</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-      <li class="nav-item">
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="consultas.php">
-          <i class="bi bi-archive"></i>
-          <span>Consultas</span>
-        </a>
-      </li><!-- End Consultas Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="utentes.php">
-          <i class="bi bi-person"></i>
-          <span>Utentes</span>
-        </a>
-      </li><!-- End Clientes Page Nav -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="medicos.php">
-          <i class="bi bi-activity"></i>
-          <span>Médicos</span>
-        </a>
-      </li><!-- End Médicos Page Nav -->
-    </ul>
-  </aside><!-- End Sidebar-->
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <li class="nav-item">
+      <a class="nav-link " href="index.php">
+        <i class="bi bi-grid"></i>
+        <span>Página principal</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
+    <li class="nav-item">
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="consultas.php">
+        <i class="bi bi-archive"></i>
+        <span>Consultas</span>
+      </a>
+    </li><!-- End Consultas Page Nav -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="utentes.php">
+        <i class="bi bi-person"></i>
+        <span>Utentes</span>
+      </a>
+    </li><!-- End Clientes Page Nav -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="medicos.php">
+        <i class="bi bi-person"></i>
+        <span>Médicos</span>
+      </a>
+    </li><!-- End Médicos Page Nav -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="especialidades.php">
+        <i class="bi bi-activity"></i>
+        <span>Especialidades</span>
+      </a>
+    </li><!-- End Especialidades Page Nav -->
+  </ul>
+</aside><!-- End Sidebar-->
 
   
 <main id="main" class="main">
@@ -132,30 +136,13 @@ session_start();
       <li class="breadcrumb-item active">Página principal</li>
     </ol>
   </nav>
-
-
 </div><!-- End Page Title -->
-
-
-
-
 
 <section class="section dashboard">
   <div class="row">
-
-
-
-
-
-
-
-
-
     <!-- Left side columns -->
     <div class="col-lg-8">
       <div class="row">
-
-
         <!-- Recent medical appointments -->
         <div class="col-12">
           <div class="card recent-sales">
