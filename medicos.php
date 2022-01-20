@@ -98,7 +98,6 @@
           <span>Consultas</span>
         </a>
       </li><!-- End Consultas Page Nav -->
-
       <li class="nav-item">
         <a class="nav-link collapsed" href="utentes.php">
           <i class="bi bi-person"></i>
@@ -107,10 +106,16 @@
       </li><!-- End Clientes Page Nav -->
       <li class="nav-item">
         <a class="nav-link" href="medicos.php">
-          <i class="bi bi-activity"></i>
+          <i class="bi bi-person"></i>
           <span>Médicos</span>
         </a>
       </li><!-- End Médicos Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="especialidades.php">
+          <i class="bi bi-activity"></i>
+          <span>Especialidades</span>
+        </a>
+      </li><!-- End Especialidades Page Nav -->
     </ul>
   </aside><!-- End Sidebar-->
 
@@ -199,7 +204,7 @@
                 </div>
                 <div class="form-group">
                   <label>Especialidade</label>
-                  <!--<select id="idEspecialidade" name="idEspecialidade" class="form-select" aria-label="Disabled select example" required>
+                  <!--<select id="idEspecialidade" name="idEspecialidade" class="idEspecialidade form-select" aria-label="Disabled select example" required>
                     <option selected>Open this select menu</option>
                   </select>-->
                   <input type="text" id="idEspecialidade" name="idEspecialidade" class="form-control" required>
@@ -260,7 +265,7 @@
                   </div>
                   <div class="form-group">
                     <label>Especialidade</label>
-                    <!--<select id="idEspecialidade" name="idEspecialidade" class="form-select" aria-label="Disabled select example" required>
+                    <!--<select id="idEspecialidade" name="idEspecialidade" class="idEspecialidade update_idEspecialidade form-select" aria-label="Disabled select example" required>
                     <option selected>Open this select menu</option>
                   </select>-->
                     <input type="text" id="idEspecialidade" name="idEspecialidade" class="form-control" required>
@@ -331,7 +336,7 @@
 <script>
   $(document).ready(function() {
 
-    //call func to ajax list medicos e especialidades
+    //call func to ajax list
     ListMedicos();
     //ListEspecialidades()
 
@@ -467,9 +472,11 @@ function ListEspecialidades(){
           }
           console.log('ListEspecialidades built array ::', dataObject); 
           
-          var select = document.getElementById("idEspecialidade");
-          for(index in dataObject) {
-              select.options[select.options.length] = new Option(dataObject[index].nome, dataObject[index].id);
+          var select = document.querySelectorAll(".idEspecialidade");
+          for (i = 0; i < select.length; i++) {
+            for(index in dataObject) {
+              select[i].options[select[i].options.length] = new Option(dataObject[index].Nome, dataObject[index].id);
+            }
           }
       },
       error: function (err) {
@@ -527,13 +534,12 @@ function DataToModal(med) {
   Form.elements["codpostal"].value = med[0].codpost;
   Form.elements["email"].value = med[0].email;
   Form.elements["nif"].value = med[0].nif;
-  //falta telem, cedula
-  /*
-  Form.elements["phone"].value = med[0].telemovel;
-  Form.elements["cprofissional"].value = med[0].cprofissional;
-  */
+  /*Form.elements["phone"].value = med[0].telemovel;
+  Form.elements["cprofissional"].value = med[0].cprofissional;*/
   Form.elements["datanascimento"].value = med[0].datanascimento;
+  
   Form.elements["idEspecialidade"].value = med[0].id_especialidade;
+  //$(".update_idEspecialidade").val(data[0].id_especialidade);
 };
 
 

@@ -98,7 +98,6 @@
           <span>Consultas</span>
         </a>
       </li><!-- End Consultas Page Nav -->
-
       <li class="nav-item">
         <a class="nav-link collapsed" href="utentes.php">
           <i class="bi bi-person"></i>
@@ -107,10 +106,16 @@
       </li><!-- End Clientes Page Nav -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="medicos.php">
-          <i class="bi bi-activity"></i>
+          <i class="bi bi-person"></i>
           <span>Médicos</span>
         </a>
       </li><!-- End Médicos Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="especialidades.php">
+          <i class="bi bi-activity"></i>
+          <span>Especialidades</span>
+        </a>
+      </li><!-- End Especialidades Page Nav -->
     </ul>
   </aside><!-- End Sidebar-->
 
@@ -169,17 +174,17 @@
                 </div>
                 <div class="form-group">
                   <label>Utente</label>
-                  <!--<select id="id_utente" name="id_utente" class="form-select" aria-label="Disabled select example" required>
-                    <option selected>Open this select menu</option>
-                  </select>-->
-                  <input type="text" id="id_utente" name="id_utente" class="form-control" required>
+                  <select id="id_utente" name="id_utente" class="id_utente form-select" aria-label="select utentes" required>
+                    <option selected>Lista de utentes</option>
+                  </select>
+                  <!--<input type="text" id="id_utente" name="id_utente" class="form-control" required>-->
                 </div>
                 <div class="form-group">
                   <label>Medico</label>
-                  <!--<select id="id_medico" name="id_medico" class="form-select" aria-label="Disabled select example" required>
-                    <option selected>Open this select menu</option>
-                  </select>-->
-                  <input type="text" id="id_medico" name="id_medico" class="form-control" required>
+                  <select id="id_medico" name="id_medico" class="id_medico form-select" aria-label="select medicos" required>
+                    <option selected>Lista de médicos</option>
+                  </select>
+                  <!--<input type="text" id="id_medico" name="id_medico" class="form-control" required>-->
                 </div>
                 <div class="form-group">
                   <label>Data da consulta</label>
@@ -214,17 +219,17 @@
                   </div>
                   <div class="form-group">
                     <label>Utente</label>
-                    <!--<select id="id_utente" name="id_utente" class="form-select" aria-label="Disabled select example" required>
-                    <option selected>Open this select menu</option>
-                  </select>-->
-                    <input type="text" id="id_utente" name="id_utente" class="form-control" required>
+                    <select id="id_utente" name="id_utente" class="id_utente update_id_utente form-select" aria-label="select utentes" required>
+                      <option selected>Lista de utentes</option>
+                    </select>
+                    <!--<input type="text" id="id_utente" name="id_utente" class="form-control" required>-->
                   </div>
                   <div class="form-group">
                     <label>Medico</label>
-                    <!--<select id="id_medico" name="id_medico" class="form-select" aria-label="Disabled select example" required>
-                    <option selected>Open this select menu</option>
-                  </select>-->
-                    <input type="text" id="id_medico" name="id_medico" class="form-control" required>
+                    <select id="id_medico" name="id_medico" class="id_medico update_id_medico form-select" aria-label="select medicos" required>
+                      <option selected>Lista de médicos</option>
+                    </select>
+                    <!--<input type="text" id="id_medico" name="id_medico" class="form-control" required>-->
                   </div>
                   <div class="form-group">
                     <label>Data da consulta</label>
@@ -290,17 +295,15 @@
   <!-- Template Main JS File -->
   <script src="static/js/main.js"></script>
   <script src="static/js/user.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
 
-<!-- data-feather icons -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
-<script> feather.replace(); </script>
 
 <script>
   $(document).ready(function() {
 
-    //call func to ajax list consultas
+    //call func to ajax list
     ListConsultas();
+    ListUtentes();
+    ListMedicos();
 
     //CREATE
     $("#add_form").submit(function (event){
@@ -410,7 +413,7 @@ function ListConsultas(){
   });
 };
 
-//funçao AJAX para listar medicos
+//funçao AJAX para listar medicos selectbox
 function ListMedicos(){
   $.ajax({
       url: "http://localhost:5000/v1/medicos/list",
@@ -430,10 +433,14 @@ function ListMedicos(){
           }
           console.log('ListMedicos built array ::', dataObject); 
           
-          var select = document.getElementById("idEspecialidade");
-          for(index in dataObject) {
-              select.options[select.options.length] = new Option(dataObject[index].nome, dataObject[index].id);
+          var select = document.querySelectorAll(".id_medico");
+          for (i = 0; i < select.length; i++) {
+            for(index in dataObject) {
+              select[i].options[select[i].options.length] = new Option(dataObject[index].Nome, dataObject[index].id);
+            }
           }
+
+          
       },
       error: function (err) {
         console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
@@ -441,7 +448,7 @@ function ListMedicos(){
   });
 };
 
-//funçao AJAX para listar utentes
+//funçao AJAX para listar utentes selectbox
 function ListUtentes(){
   $.ajax({
       url: "http://localhost:5000/v1/utentes/list",
@@ -460,11 +467,14 @@ function ListUtentes(){
             dataObject.push(temp);
           }
           console.log('ListUtentes built array ::', dataObject); 
-          
-          var select = document.getElementById("idEspecialidade");
-          for(index in dataObject) {
-              select.options[select.options.length] = new Option(dataObject[index].nome, dataObject[index].id);
+
+          var select = document.querySelectorAll(".id_utente");
+          for (i = 0; i < select.length; i++) {
+            for(index in dataObject) {
+              select[i].options[select[i].options.length] = new Option(dataObject[index].Nome, dataObject[index].id);
+            }
           }
+            
       },
       error: function (err) {
         console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
@@ -517,8 +527,10 @@ function DataToModal(data) {
   var Form = document.forms['update_form'];
   Form.elements["id"].value = data[0].id;
   Form.elements["descricao"].value = data[0].descricao;
-  Form.elements["id_utente"].value = data[0].id_utente;
-  Form.elements["id_medico"].value = data[0].id_medico;
+
+  $(".update_id_utente").val(data[0].id_utente);
+  $(".update_id_medico").val(data[0].id_medico);
+
   Form.elements["dataconsulta"].value = data[0].dataconsulta;
 };
 
