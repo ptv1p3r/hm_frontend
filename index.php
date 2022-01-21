@@ -127,11 +127,15 @@
 
     <section class="section">
  
-      <div class="container">
+      <div class="container" style="margin-left:270px;">
         <div class="row"> 
+        <div class="col-12 mb-3" style ="visibility:hidden;">
+              <a href="#" type="button" class="btn btn-primary btn-lg float-end" data-toggle="modal"><i class="material-icons"></i></a>
+              <p id="success"></p>
+                </div>
         </div>
         <!-- TABLE -->
-        <div class="col-6">
+        <div class="col-7">
             <div class="card recent-sales">
               <div class="card-body">
               <h5 class="card-title">Frases do dia</h5>
@@ -141,6 +145,7 @@
                   </div>
                 </div>
                 <div id="textodia"> </div>
+                <br>
               </div>
             </div>
           </div><!-- End TABLE -->
