@@ -324,7 +324,10 @@
 
               document.getElementById("add-modal-btn-close").click(); //simular modal close button press  
               ListConsultas();
-              alert(response,"info");
+
+              var alertMsg = [];
+              alertMsg.push(response);
+              alert(alertMsg,"info");
             }
         });
     });
@@ -348,7 +351,11 @@
 
               document.getElementById("update-modal-btn-close").click(); //simular modal close button press  
               ListConsultas();
-              alert(response,"info");
+
+              var alertMsg = [];
+              alertMsg.push(response);
+              console.log('response push ::', alertMsg );
+              alert(alertMsg,"info");
             }
         });
     });
@@ -369,10 +376,13 @@
             data: formData,
             success: function(response) {
               console.log('response ::', response);
-
+              
               document.getElementById("delete-modal-btn-close").click(); //simular modal close button press  
               ListConsultas();
-              alert(response,"info");
+              
+              var alertMsg = [];
+              alertMsg.push(response);
+              alert(alertMsg,"info");
             }
         });
     });
@@ -397,10 +407,10 @@ function ListConsultas(){
             
             temp.id = med.id;
             temp.Descricao = med.descricao;
-            temp.IdUtente = med.id_utente;
-            temp.IdMedico = med.id_medico;
+            getUtenteByIDToTable(med.id_utente, function(output) {temp.IdUtente = output;});
+            getMedicoByIDToTable(med.id_medico, function(output) {temp.IdMedico = output;});
             temp.DataConsulta = med.dataconsulta;
-
+            
             dataObject.push(temp);
           }
           console.log('ListConsultas built array ::', dataObject); 
@@ -498,6 +508,39 @@ function getConsultaByID(id){
   });
 };
 
+//funçao AJAX para get medico by id
+function getMedicoByIDToTable(medico_id, handleData){
+  $.ajax({
+    url: "http://localhost:5000/v1/medicos/" + medico_id,
+    dataType: 'json',
+    type: 'GET',
+    async: false,
+    success: function(data) {
+        console.log('getMedicoByIDToTable ::', data);
+        handleData(data.data[0].nome);
+    },
+    error: function (err) {
+      console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+    }
+  });
+};
+//funçao AJAX para get utente by id
+function getUtenteByIDToTable(utente_id, handleData){
+  $.ajax({
+    url: "http://localhost:5000/v1/utentes/" + utente_id,
+    dataType: 'json',
+    type: 'GET',
+    async: false,
+    success: function(data) {
+        console.log('getUtenteByIDToTable ::', data);
+        handleData(data.data[0].nome);
+    },
+    error: function (err) {
+      console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+    }
+  });
+};
+
 
 //funcao delete consulta
 function deleteConsultaByID(id){
@@ -510,7 +553,7 @@ function deleteConsultaByID(id){
 //funcao generateTable consulta
 function genTable(data){
   var keys = Object.keys(data[0]);
-
+  console.log(data);
   return `<table>
             <thead>
               ${keys.map(i=>`<th scope="col-s-auto">${i}</th>`).join('')}<th>Editar</th><th>Apagar</th>
