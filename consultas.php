@@ -175,20 +175,20 @@
                 <div class="form-group">
                   <label>Utente</label>
                   <select id="id_utente" name="id_utente" class="id_utente form-select" aria-label="select utentes" required>
-                    <option selected>Lista de utentes</option>
+                    <option disabled selected>Lista de utentes</option>
                   </select>
                   <!--<input type="text" id="id_utente" name="id_utente" class="form-control" required>-->
                 </div>
                 <div class="form-group">
                   <label>Medico</label>
                   <select id="id_medico" name="id_medico" class="id_medico form-select" aria-label="select medicos" required>
-                    <option selected>Lista de médicos</option>
+                    <option disabled selected>Lista de médicos</option>
                   </select>
                   <!--<input type="text" id="id_medico" name="id_medico" class="form-control" required>-->
                 </div>
                 <div class="form-group">
                   <label>Data da consulta</label>
-                  <input type="text" id="dataconsulta" name="dataconsulta" class="form-control" required>
+                  <input type="text" id="dataconsulta" name="dataconsulta" class="form-control" placeholder="yyyy-mm-dd 00:00:00" required>
                 </div>
               </div>
               <div class="modal-footer">
@@ -220,20 +220,20 @@
                   <div class="form-group">
                     <label>Utente</label>
                     <select id="id_utente" name="id_utente" class="id_utente update_id_utente form-select" aria-label="select utentes" required>
-                      <option selected>Lista de utentes</option>
+                      <option disabled selected>Lista de utentes</option>
                     </select>
                     <!--<input type="text" id="id_utente" name="id_utente" class="form-control" required>-->
                   </div>
                   <div class="form-group">
                     <label>Medico</label>
                     <select id="id_medico" name="id_medico" class="id_medico update_id_medico form-select" aria-label="select medicos" required>
-                      <option selected>Lista de médicos</option>
+                      <option disabled selected>Lista de médicos</option>
                     </select>
                     <!--<input type="text" id="id_medico" name="id_medico" class="form-control" required>-->
                   </div>
                   <div class="form-group">
                     <label>Data da consulta</label>
-                    <input type="text" id="dataconsulta" name="dataconsulta" class="form-control" required>
+                    <input type="text" id="dataconsulta" name="dataconsulta" class="form-control" placeholder="yyyy-mm-dd 00:00:00" required>
                   </div>
                 </div>
               <div class="modal-footer">
@@ -392,7 +392,7 @@
 
 
 //-- FUNCTIONS
-//funçao AJAX para listar medicos
+//funçao AJAX para listar consultas
 function ListConsultas(){
   $.ajax({
       url: "http://localhost:5000/v1/consultas/list",
@@ -402,14 +402,17 @@ function ListConsultas(){
           console.log('ListConsultas ::', data);
 
           var dataObject = [];
-          for (var med of data.data) {
-            var temp = {id: "", Descricao: "", IdUtente: "", IdMedico: "", DataConsulta: ""};
+          for (var cons of data.data) {
+            var temp = {id: "", Descricao: "", Utente: "", Medico: "", Especialidade: "", DataConsulta: ""};
             
-            temp.id = med.id;
-            temp.Descricao = med.descricao;
-            getUtenteByIDToTable(med.id_utente, function(output) {temp.IdUtente = output;});
-            getMedicoByIDToTable(med.id_medico, function(output) {temp.IdMedico = output;});
-            temp.DataConsulta = med.dataconsulta;
+            temp.id = cons.id;
+            temp.Descricao = cons.descricao;
+            getUtenteByIDToTable(cons.id_utente, function(output) {temp.Utente = output;});
+            getMedicoByIDToTable(cons.id_medico, function(output) {
+              temp.Medico = output.nome;
+              getEspecialidadeByIDToTable(output.id_especialidade, function(output){ temp.Especialidade = output});
+            });
+            temp.DataConsulta = cons.dataconsulta;
             
             dataObject.push(temp);
           }
@@ -508,7 +511,32 @@ function getConsultaByID(id){
   });
 };
 
-//funçao AJAX para get medico by id
+//funcao delete consulta
+function deleteConsultaByID(id){
+  var Form = document.forms['delete_form'];
+  Form.elements["id"].value = id;
+  var consnome;
+  getConsultaDescricao(id, function(output){ consnome = output })
+  document.getElementById("delete_form_message").innerHTML = "Deseja apagar consulta '"+consnome+"' de nº"+ id;
+};
+//funçao AJAX para get consulta by id
+function getConsultaDescricao(cons_id, handleData){
+  $.ajax({
+    url: "http://localhost:5000/v1/consultas/" + cons_id,
+    dataType: 'json',
+    type: 'GET',
+    async: false,
+    success: function(data) {
+        console.log('getConsultaDescricao ::', data);
+        handleData(data.data[0].descricao);
+    },
+    error: function (err) {
+      console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+    }
+  });
+};
+
+//funçao AJAX para get medico by id to table
 function getMedicoByIDToTable(medico_id, handleData){
   $.ajax({
     url: "http://localhost:5000/v1/medicos/" + medico_id,
@@ -517,14 +545,15 @@ function getMedicoByIDToTable(medico_id, handleData){
     async: false,
     success: function(data) {
         console.log('getMedicoByIDToTable ::', data);
-        handleData(data.data[0].nome);
+        handleData(data.data[0]);
     },
     error: function (err) {
       console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
     }
   });
 };
-//funçao AJAX para get utente by id
+
+//funçao AJAX para get utente by id to table
 function getUtenteByIDToTable(utente_id, handleData){
   $.ajax({
     url: "http://localhost:5000/v1/utentes/" + utente_id,
@@ -541,13 +570,21 @@ function getUtenteByIDToTable(utente_id, handleData){
   });
 };
 
-
-//funcao delete consulta
-function deleteConsultaByID(id){
-  var Form = document.forms['delete_form'];
-  Form.elements["id"].value = id;
-
-  document.getElementById("delete_form_message").innerHTML = "Deseja apagar consulta nº"+ id;
+//funçao AJAX para get especialidade by id to table
+function getEspecialidadeByIDToTable(esp_id, handleData){
+  $.ajax({
+    url: "http://localhost:5000/v1/especialidades/" + esp_id,
+    dataType: 'json',
+    type: 'GET',
+    async: false,
+    success: function(data) {
+        console.log('getEspecialidadeByIDToTable ::', data);
+        handleData(data.data[0].nome);
+    },
+    error: function (err) {
+      console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+    }
+  });
 };
 
 //funcao generateTable consulta
