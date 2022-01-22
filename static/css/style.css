@@ -38,7 +38,7 @@
 }
 /*------------------- FIM clinica.php*/
 
-/*------------------- GOOGLE MAP*/
+/*------------------- Google map*/
 .map-container-2{
   height:350px;
 }
@@ -50,14 +50,26 @@
   width:100%;
   padding-top: 20px;
 }
-/*------------------- FIM GOOGLE MAP*/
+/*------------------- FIM Google map*/
 
 
-/*------------------- PAGE MODALS CLOSE BUTTON*/
+/*------------------- modal close button
+-- all pages
+*/
 form .btn-close {
   background-size: 1rem !important;
 }
-/*------------------- FIM PAGE MODALS CLOSE BUTTON*/
+/*------------------- FIM modal close button*/
+
+
+/*------------------- card-body  
+-- all pages add overflow to scroll on table
+*/
+.card-body{
+  overflow: auto;
+}
+/*------------------- FIM card-body*/
+
 
 
 
