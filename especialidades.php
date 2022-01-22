@@ -169,26 +169,8 @@
               </div>
               <div class="modal-body">
                 <div class="form-group">
-                  <label>Descrição</label>
-                  <input type="text" id="descricao" name="descricao" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label>Utente</label>
-                  <select id="id_utente" name="id_utente" class="form-select" aria-label="select utentes" required>
-                    <option selected>Lista de utentes</option>
-                  </select>
-                  <!--<input type="text" id="id_utente" name="id_utente" class="form-control" required>-->
-                </div>
-                <div class="form-group">
-                  <label>Medico</label>
-                  <select id="id_medico" name="id_medico" class="form-select" aria-label="select medicos" required>
-                    <option selected>Lista de médicos</option>
-                  </select>
-                  <!--<input type="text" id="id_medico" name="id_medico" class="form-control" required>-->
-                </div>
-                <div class="form-group">
-                  <label>Data da consulta</label>
-                  <input type="text" id="dataconsulta" name="dataconsulta" class="form-control" required>
+                  <label>Nome</label>
+                  <input type="text" id="name" name="name" class="form-control" required>
                 </div>
               </div>
               <div class="modal-footer">
@@ -215,25 +197,7 @@
                 <div class="form-group">
                     <label>Descrição</label>
                     <input type="hidden" id="id" name="id" class="form-control">
-                    <input type="text" id="descricao" name="descricao" class="form-control" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Utente</label>
-                    <!--<select id="id_utente" name="id_utente" class="form-select" aria-label="Disabled select example" required>
-                    <option selected>Open this select menu</option>
-                  </select>-->
-                    <input type="text" id="id_utente" name="id_utente" class="form-control" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Medico</label>
-                    <!--<select id="id_medico" name="id_medico" class="form-select" aria-label="Disabled select example" required>
-                    <option selected>Open this select menu</option>
-                  </select>-->
-                    <input type="text" id="id_medico" name="id_medico" class="form-control" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Data da consulta</label>
-                    <input type="text" id="dataconsulta" name="dataconsulta" class="form-control" required>
+                    <input type="text" id="name" name="name" class="form-control" required>
                   </div>
                 </div>
               <div class="modal-footer">
@@ -297,12 +261,197 @@
   <script src="static/js/user.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
 
-<!-- data-feather icons -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
-<script> feather.replace(); </script>
 
 <script>
+  $(document).ready(function() {
+
+    //call func to ajax list
+    ListEspecialidades();
+
+    //CREATE
+    $("#add_form").submit(function (event){
+        event.preventDefault();
+        var formData = {
+            'action': 'addEspecialidade',
+            'data': $(this).serializeArray()
+        };
+        console.log(formData)
+        
+        $.ajax({
+            url: "<?php echo $path . "/toJson.php" ?>",
+            dataType: 'json',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+              console.log('response ::', response );
+
+              document.getElementById("add-modal-btn-close").click(); //simular modal close button press  
+              ListEspecialidades();
+              alert(response,"info");
+            }
+        });
+    });
+
+    //UPDATE
+    $("#update_form").submit(function (event){
+        event.preventDefault();
+        var formData = {
+            'action': 'updateEspecialidade',
+            'data': $(this).serializeArray()
+        };
+        console.log(formData)
+
+        $.ajax({
+            url: "<?php echo $path . "/toJson.php" ?>",
+            dataType: 'json',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+              console.log('response ::', response );
+
+              document.getElementById("update-modal-btn-close").click(); //simular modal close button press  
+              ListEspecialidades();
+              alert(response,"info");
+            }
+        });
+    });
+
+    //DELETE
+    $("#delete_form").submit(function (event){
+        event.preventDefault();
+        var formData = {
+            'action': 'deleteEspecialidade',
+            'data': $(this).serializeArray()
+        };
+        console.log(formData)
+
+        $.ajax({
+            url: "<?php echo $path . "/toJson.php" ?>",
+            dataType: 'json',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+              console.log('response ::', response );
+
+              document.getElementById("delete-modal-btn-close").click(); //simular modal close button press  
+              ListEspecialidades();
+              alert(response,"info");
+            }
+        });
+    });
+});
+
+
+
+
+//-- FUNCTIONS
+//funçao AJAX para listar especialidades
+function ListEspecialidades(){
+  $.ajax({
+    url: "http://localhost:5000/v1/especialidades/list",
+      dataType: 'json',
+      type: 'GET',
+      success: function(data) {
+          console.log('ListEspecialidades ::', data);
+
+          var dataObject = [];
+          for (var esp of data.data) {
+            var temp = {id: "", Nome: ""};
+            
+            temp.id = esp.id;
+            temp.Nome = esp.nome;
+
+            dataObject.push(temp);
+          }
+          console.log('ListEspecialidades built array ::', dataObject);  
+          document.getElementById("especialidade_table").innerHTML = genTable(dataObject);
+      },
+      error: function (err) {
+        console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+        document.getElementById("especialidade_table").innerHTML = ("AJAX error in request: " + JSON.stringify(err.responseJSON["message"], null, 2));
+      }
+  });
+};
+
+
+//funçao AJAX para get especialidade by id
+function getEspecialidadeByID(esp_id){
+  $.ajax({
+      url: "http://localhost:5000/v1/especialidades/" + esp_id,
+      dataType: 'json',
+      type: 'GET',
+      success: function(data) {
+          console.log('getEspecialidadeByID ::', data);
+          DataToModal(data.data);
+      },
+      error: function (err) {
+        console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+      }
+  });
+};
+
+
+//funcao delete especialidade
+function deleteEspecialidadeByID(esp_id){
+  var Form = document.forms['delete_form'];
+  Form.elements["id"].value = esp_id;
+  var espname;
+  getEspecialidadeName(esp_id, function(output) { espname = output});
+  document.getElementById("delete_form_message").innerHTML = "Deseja apagar especialidade '" + espname +"' de nº" + esp_id;
+};
+//funçao AJAX para get especialidade by id
+function getEspecialidadeName(esp_id, handleData){
+  $.ajax({
+    url: "http://localhost:5000/v1/especialidades/" + esp_id,
+    dataType: 'json',
+    type: 'GET',
+    async: false,
+    success: function(data) {
+        console.log('getEspecialidadeName ::', data);
+        handleData(data.data[0].nome);
+    },
+    error: function (err) {
+      console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+    }
+  });
+};
+
+//funcao generateTable 
+function genTable(data){
+  var keys = Object.keys(data[0]);
+
+  return `<table>
+            <thead>
+              ${keys.map(i=>`<th scope="col-s-auto">${i}</th>`).join('')}<th>Editar</th><th>Apagar</th>
+            </thead>
+            <tbody>
+              ${data.map(i=>`<tr>${keys.map(k => `<td>${i[k]}</td>`).join('')}<td><button id="tbl_btn_update" onclick="getEspecialidadeByID(${i.id})" type="button" class="btn btn-warning" href="#updateModal" data-toggle="modal" "><i class="bi bi-pencil-square"></i></button></td> <td><button type="button" class="btn btn-danger" href="#deleteModal" data-toggle="modal" onclick="deleteEspecialidadeByID(${i.id})"><i class="bi bi-trash"></i></button></td>`).join('')}
+            </tbody>
+          </table>`;
+};
+
+//funcao mostra dados especialidade no modal update
+function DataToModal(data) {
+  console.log('DataToModal ::',data);
+  var Form = document.forms['update_form'];
+  Form.elements["id"].value = data[0].id;
+  Form.elements["name"].value = data[0].nome;
+};
+
+
+//mensagem alerta para CRUD
+var alertPlaceholder = document.getElementById('liveAlert')
+function alert(message, type) {
+  var wrapper = document.createElement('div')
+  wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" role="alert"></button></div>'
+
+  alertPlaceholder.append(wrapper)
   
+  // timeout alert message
+  setTimeout(function () {
+    $(".alert").remove()
+  }, 3000);
+}
 </script>
 
 </body>
