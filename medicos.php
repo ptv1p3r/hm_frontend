@@ -49,7 +49,6 @@
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
-
         <li class="nav-item d-block d-lg-none">
           <a class="nav-link nav-icon search-bar-toggle " href="#">
             <i class="bi bi-search"></i>
@@ -126,7 +125,6 @@
   </div><!-- End Page Title -->
 
     <section class="section">
- 
       <div class="container">
         <div class="row"> 
           <div class="col-12 mb-3">
@@ -200,14 +198,14 @@
                 </div>
                 <div class="form-group">
                   <label>DataNascimento</label>
-                  <input type="text" id="datanascimento" name="datanascimento" class="form-control" required>
+                  <input type="text" id="datanascimento" name="datanascimento" class="form-control" placeholder="yyyy-mm-dd" required>
                 </div>
                 <div class="form-group">
                   <label>Especialidade</label>
-                  <!--<select id="idEspecialidade" name="idEspecialidade" class="idEspecialidade form-select" aria-label="Disabled select example" required>
-                    <option selected>Open this select menu</option>
-                  </select>-->
-                  <input type="text" id="idEspecialidade" name="idEspecialidade" class="form-control" required>
+                  <select id="idEspecialidade" name="idEspecialidade" class="idEspecialidade form-select" aria-label="Disabled select example" required>
+                    <option disabled selected>Lista de especialidades</option>
+                  </select>
+                  <!--<input type="text" id="idEspecialidade" name="idEspecialidade" class="form-control" required>-->
                 </div>
               </div>
               <div class="modal-footer">
@@ -261,14 +259,14 @@
                   </div>
                   <div class="form-group">
                     <label>DataNascimento</label>
-                    <input type="text" id="datanascimento" name="datanascimento" class="form-control" required>
+                    <input type="text" id="datanascimento" name="datanascimento" class="form-control" placeholder="yyyy-mm-dd" required>
                   </div>
                   <div class="form-group">
                     <label>Especialidade</label>
-                    <!--<select id="idEspecialidade" name="idEspecialidade" class="idEspecialidade update_idEspecialidade form-select" aria-label="Disabled select example" required>
-                    <option selected>Open this select menu</option>
-                  </select>-->
-                    <input type="text" id="idEspecialidade" name="idEspecialidade" class="form-control" required>
+                    <select id="idEspecialidade" name="idEspecialidade" class="idEspecialidade update_idEspecialidade form-select" aria-label="Disabled select example" required>
+                      <option disabled selected>Lista de especialidades</option>
+                    </select>
+                    <!--<input type="text" id="idEspecialidade" name="idEspecialidade" class="form-control" required>-->
                   </div>
                 </div>
               <div class="modal-footer">
@@ -338,7 +336,7 @@
 
     //call func to ajax list
     ListMedicos();
-    //ListEspecialidades()
+    ListEspecialidades();
 
     //CREATE
     $("#add_form").submit(function (event){
@@ -428,10 +426,11 @@ function ListMedicos(){
 
           var dataObject = [];
           for (var med of data.data) {
-            var temp = {id: "", Nome: "", Morada: "", CodPostal: "", Email: "", Nif: "", DataNascimento: "", Datecreate: "", Datemodify: ""};
+            var temp = {id: "", Nome: "", Especialidade: "", Morada: "", CodPostal: "", Email: "", Nif: "", DataNascimento: "", Datecreate: "", Datemodify: ""};
             
             temp.id = med.id;
             temp.Nome = med.nome;
+            getEspecialidadeByIDToTable(med.id_especialidade, function(output){ temp.Especialidade = output});
             temp.Morada = med.morada;
             temp.CodPostal = med.codpost;
             temp.Email = med.email;
@@ -506,8 +505,43 @@ function getMedicoByID(medico_id){
 function deleteMedicoByID(medico_id){
   var Form = document.forms['delete_form'];
   Form.elements["id"].value = medico_id;
+  var medname;
+  getMedicoName(medico_id, function(output){ medname = output});
+  document.getElementById("delete_form_message").innerHTML = "Deseja apagar medico '"+medname+"' de nº"+ medico_id;
+};
+//funçao AJAX para get medico by id
+function getMedicoName(medico_id, handleData){
+  $.ajax({
+    url: "http://localhost:5000/v1/medicos/" + medico_id,
+    dataType: 'json',
+    type: 'GET',
+    async: false,
+    success: function(data) {
+        console.log('getMedicoName ::', data);
+        handleData(data.data[0].nome);
+    },
+    error: function (err) {
+      console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+    }
+  });
+};
 
-  document.getElementById("delete_form_message").innerHTML = "Deseja apagar medico nº"+ medico_id;
+
+//funçao AJAX para get especialidade by id to table
+function getEspecialidadeByIDToTable(esp_id, handleData){
+  $.ajax({
+    url: "http://localhost:5000/v1/especialidades/" + esp_id,
+    dataType: 'json',
+    type: 'GET',
+    async: false,
+    success: function(data) {
+        console.log('getEspecialidadeByIDToTable ::', data);
+        handleData(data.data[0].nome);
+    },
+    error: function (err) {
+      console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+    }
+  });
 };
 
 //funcao generateTable medicos
@@ -525,21 +559,21 @@ function genTable(data){
 };
 
 //funcao mostra dados do medico no modal update
-function DataToModal(med) {
-  console.log('DataToModal ::',med);
+function DataToModal(data) {
+  console.log('DataToModal ::',data);
   var Form = document.forms['update_form'];
-  Form.elements["id"].value = med[0].id;
-  Form.elements["name"].value = med[0].nome;
-  Form.elements["address"].value = med[0].morada;
-  Form.elements["codpostal"].value = med[0].codpost;
-  Form.elements["email"].value = med[0].email;
-  Form.elements["nif"].value = med[0].nif;
-  /*Form.elements["phone"].value = med[0].telemovel;
-  Form.elements["cprofissional"].value = med[0].cprofissional;*/
-  Form.elements["datanascimento"].value = med[0].datanascimento;
+  Form.elements["id"].value = data[0].id;
+  Form.elements["name"].value = data[0].nome;
+  Form.elements["address"].value = data[0].morada;
+  Form.elements["codpostal"].value = data[0].codpost;
+  Form.elements["email"].value = data[0].email;
+  Form.elements["nif"].value = data[0].nif;
+  /*Form.elements["phone"].value = data[0].telemovel;
+  Form.elements["cprofissional"].value = data[0].cprofissional;*/
+  Form.elements["datanascimento"].value = data[0].datanascimento;
   
-  Form.elements["idEspecialidade"].value = med[0].id_especialidade;
-  //$(".update_idEspecialidade").val(data[0].id_especialidade);
+  //Form.elements["idEspecialidade"].value = data[0].id_especialidade;
+  $(".update_idEspecialidade").val(data[0].id_especialidade);
 };
 
 
