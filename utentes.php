@@ -205,7 +205,7 @@
                 </div>
                 <div class="form-group">
                   <label>DataNascimento</label>
-                  <input type="text" id="datanascimento" name="datanascimento" class="form-control" required>
+                  <input type="text" id="datanascimento" name="datanascimento" class="form-control" placeholder="yyyy-mm-dd" required>
                 </div>
               </div>
               <div class="modal-footer">
@@ -260,7 +260,7 @@
                   </div>
                   <div class="form-group">
                     <label>DataNascimento</label>
-                    <input type="text" id="datanascimento" name="datanascimento" class="form-control" required>
+                    <input type="text" id="datanascimento" name="datanascimento" class="form-control" placeholder="yyyy-mm-dd" required>
                   </div>
                 </div>
               <div class="modal-footer">
@@ -417,18 +417,18 @@ function ListUtentes(){
           console.log('ListUtentes ::', data);
 
           var dataObject = [];
-          for (var med of data.data) {
+          for (var utent of data.data) {
             var temp = {id: "", Nome: "", Morada: "", CodPostal: "", Email: "", Nif: "", DataNascimento: "", Datecreate: "", Datemodify: ""};
             
-            temp.id = med.id;
-            temp.Nome = med.nome;
-            temp.Morada = med.morada;
-            temp.CodPostal = med.codpost;
-            temp.Email = med.email;
-            temp.Nif = med.nif;
-            temp.DataNascimento = med.datanascimento;
-            temp.Datecreate = med.datecreate;
-            temp.Datemodify = med.datemodify;
+            temp.id = utent.id;
+            temp.Nome = utent.nome;
+            temp.Morada = utent.morada;
+            temp.CodPostal = utent.codpost;
+            temp.Email = utent.email;
+            temp.Nif = utent.nif;
+            temp.DataNascimento = utent.datanascimento;
+            temp.Datecreate = utent.datecreate;
+            temp.Datemodify = utent.datemodify;
 
             dataObject.push(temp);
           }
@@ -463,8 +463,25 @@ function getUtenteByID(id){
 function deleteUtenteByID(id){
   var Form = document.forms['delete_form'];
   Form.elements["id"].value = id;
-
-  document.getElementById("delete_form_message").innerHTML = "Deseja apagar utente nº"+ id;
+  var utentname;
+  getUtenteName(id, function(output){utentname = output});
+  document.getElementById("delete_form_message").innerHTML = "Deseja apagar utente '"+utentname+"' de nº"+ id;
+};
+//funçao AJAX para get utente by id
+function getUtenteName(utente_id, handleData){
+  $.ajax({
+    url: "http://localhost:5000/v1/utentes/" + utente_id,
+    dataType: 'json',
+    type: 'GET',
+    async: false,
+    success: function(data) {
+        console.log('getUtenteName ::', data);
+        handleData(data.data[0].nome);
+    },
+    error: function (err) {
+      console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+    }
+  });
 };
 
 //funcao generateTable utentes
@@ -492,7 +509,6 @@ function DataToModal(data) {
   Form.elements["email"].value = data[0].email;
   Form.elements["nif"].value = data[0].nif;
   Form.elements["nmr_utente"].value = data[0].nmr_utente;
-  //falta telem
   /*
   Form.elements["phone"].value = data[0].telemovel;
   */
