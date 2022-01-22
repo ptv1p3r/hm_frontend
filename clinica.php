@@ -63,7 +63,7 @@
                     <div class="col-md-6">
                         <!--Google map-->
                         <div id="map-container-2" class="z-depth-1-half map-container-2">
-                        <iframe src="https://maps.google.com/maps?q=chicago&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        <iframe src="https://maps.google.com/maps?q=ISMAT+-+Instituto+Superior+Manuel+Teixeira+Gomes&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="col-md-6 clinica_horario">
@@ -82,13 +82,13 @@
                         <i class="size-32 align-middle" data-feather="phone"></i>
                         <p>Marcação de consultas ou  <br>
                             esclarecimento de dúvidas: <br> 
-                            (052) 611-5711</p>
+                            (+123) 456 789 012</p>
                     </div>
                     <div class="col-4">
                         <div class="contact_through_inner">
                             <i class="size-32 align-middle" data-feather="map-pin"></i>
-                            <p>E7088 Micaela Cliffs, <br>
-                                Thielshire, OK 95062</p>
+                            <p>R. Dr. Estevão de Vasconcelos 33a, <br>
+                            8500-724 Portimão</p>
                         </div>
                     </div>
                     <div class="col-4">
@@ -96,7 +96,7 @@
                             <i class="size-32 align-middle" data-feather="mail"></i>
                             <p>Esclarecimento de  <br>
                              dúvidas via Email:<br>
-                                contact@meditex.com</p>
+                                contact@consultaslda.com</p>
                         </div>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+  <footer id="footer" class="footer" style="margin-left:unset !important">
     <div class="copyright">
        &copy; 2022 <strong><span>Consultas LDA</span></strong>
     </div>
