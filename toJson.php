@@ -150,6 +150,43 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
             }
             break;
             // CONSULTAS END
+
+        // ESPECIALIDADES
+        case 'addEspecialidade' :
+            if(isset($_POST['data']) && !empty($_POST['data'])) {
+                $data = $_POST['data'];
+
+                $dataObject = (object) array(
+                    'Nome' => $data[0]['value']
+                );
+
+                $result = callAPI("POST", "http://localhost:5000/v1/especialidades/create", $dataObject);
+                echo json_encode($result);
+            }
+            break;
+        case 'updateEspecialidade' :
+            if(isset($_POST['data']) && !empty($_POST['data'])) {
+                $data = $_POST['data'];
+
+                $dataObject = (object) array(
+                    'Nome' => $data[1]['value']
+                );
+
+                $result = callAPI("POST", "http://localhost:5000/v1/especialidades/update/" . $data[0]['value'], $dataObject);
+                echo json_encode($result);
+            }
+            break;
+        case 'deleteEspecialidade' :
+            if(isset($_POST['data']) && !empty($_POST['data'])) {
+                $data = $_POST['data'];
+
+                $dataObject = (object) array( /*vazio*/ );
+
+                $result = callAPI("DELETE", "http://localhost:5000/v1/especialidades/delete/" . $data[0]['value'], $dataObject);
+                echo json_encode($result);
+            }
+            break;
+            // ESPECIALIDADES END
         default:
             echo json_encode("ERRO: ação invalida");
     }
