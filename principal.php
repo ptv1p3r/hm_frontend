@@ -69,7 +69,7 @@
               <hr class="dropdown-divider">
             </li>
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="index.php">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -86,7 +86,7 @@
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="index.php">
+        <a class="nav-link" href="#">
           <i class="bi bi-grid"></i>
           <span>Página principal</span>
         </a>

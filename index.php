@@ -29,37 +29,8 @@
   <!-- Template Main CSS File -->
   <link href="static/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.2.0
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
-
 <body>
-<?php session_start(); /* Starts the session */
-/* Check Login form submitted */
-if(isset($_POST['submit'])){
-/* Define username and associated password array */
-$logins = array('admin' => 'admin');
-
-/* Check and assign submitted Username and Password to new variable */
-$Username = isset($_POST['Username']) ? $_POST['Username'] : '';
-$Password = isset($_POST['Password']) ? $_POST['Password'] : '';
-
-/* Check Username and Password existence in defined array */
-if (isset($logins[$Username]) && $logins[$Username] == $Password){
-/* Success: Set session variables and redirect to Protected page  */
-$_SESSION['UserData']['Username']=$logins[$Username];
-header("location:principal.php");
-exit;
-} else {
-/*Unsuccessful attempt: Set error message */
-$msg="<span style='color:red'>Login invalido</span>";
-}
-}
-?>
   <main>
     <div class="container">
 
@@ -76,9 +47,50 @@ $msg="<span style='color:red'>Login invalido</span>";
                   <form class="row g-3 needs-validation" method="POST">
 
                     <div class="col-12">
+                      <div id="liveAlert" class="col-12 mb-3">
+
+                      </div>
+                      <script>
+                      //mensagem alerta para CRUD
+                      var alertPlaceholder = document.getElementById('liveAlert');
+                      function alertmsg(message, type) {
+                        var wrapper = document.createElement('div')
+                        wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" role="alert"></button></div>'
+
+                        alertPlaceholder.append(wrapper)
+                        
+                        // timeout alert message
+                        setTimeout(function () {
+                          $(".alert").remove()
+                        }, 3000);
+                      }
+                      </script>
+                      <?php 
+                        session_start(); /* Starts the session */
+
+                        /* Check Login form submitted */
+                        if(isset($_POST['submit'])){
+                          /* Define username and associated password array */
+                          $logins = array('admin' => 'admin');
+
+                          /* Check and assign submitted Username and Password to new variable */
+                          $Username = isset($_POST['Username']) ? $_POST['Username'] : '';
+                          $Password = isset($_POST['Password']) ? $_POST['Password'] : '';
+
+                          /* Check Username and Password existence in defined array */
+                          if (isset($logins[$Username]) && $logins[$Username] == $Password){
+                            /* Success: Set session variables and redirect to Protected page  */
+                            $_SESSION['UserData']['Username']=$logins[$Username];
+                            header("location:principal.php");
+                            exit;
+                          } else {
+                            echo '<script>alertmsg("Login invalido","danger");</script>';
+                          }
+                        }
+                      ?>
+
                       <label for="yourUsername" class="form-label">Username</label>
                       <div class="input-group has-validation">
-                        <!--<span class="input-group-text" id="inputGroupPrepend">@</span>  -->
                         <input type="text" name="Username" class="form-control" id="yourUsername" required>
                         <div class="invalid-feedback">Por favor insira o username!</div>
                       </div>
@@ -121,11 +133,16 @@ $msg="<span style='color:red'>Login invalido</span>";
   <script src="static/vendor/quill/quill.min.js"></script>
   <script src="static/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="static/vendor/tinymce/tinymce.min.js"></script>
-  <script src="static/vendor/php-email-form/validate.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
   <!-- Template Main JS File -->
   <script src="static/js/main.js"></script>
+  <script>
+$(document).ready(function() {
+   
+});
 
+
+</script>
 </body>
-
 </html>
