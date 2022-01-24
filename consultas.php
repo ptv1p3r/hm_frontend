@@ -324,10 +324,7 @@
 
               document.getElementById("add-modal-btn-close").click(); //simular modal close button press  
               ListConsultas();
-
-              var alertMsg = [];
-              alertMsg.push(response);
-              alert(alertMsg,"info");
+              alert(JSON.parse(response).message,"info");
             }
         });
     });
@@ -351,11 +348,7 @@
 
               document.getElementById("update-modal-btn-close").click(); //simular modal close button press  
               ListConsultas();
-
-              var alertMsg = [];
-              alertMsg.push(response);
-              console.log('response push ::', alertMsg );
-              alert(alertMsg,"info");
+              alert(JSON.parse(response).message,"info");
             }
         });
     });
@@ -379,10 +372,7 @@
               
               document.getElementById("delete-modal-btn-close").click(); //simular modal close button press  
               ListConsultas();
-              
-              var alertMsg = [];
-              alertMsg.push(response);
-              alert(alertMsg,"info");
+              alert(JSON.parse(response).message,"info");
             }
         });
     });

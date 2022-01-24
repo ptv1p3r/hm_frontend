@@ -287,7 +287,7 @@
 
               document.getElementById("add-modal-btn-close").click(); //simular modal close button press  
               ListEspecialidades();
-              alert(response,"info");
+              alert(JSON.parse(response).message,"info");
             }
         });
     });
@@ -311,7 +311,7 @@
 
               document.getElementById("update-modal-btn-close").click(); //simular modal close button press  
               ListEspecialidades();
-              alert(response,"info");
+              alert(JSON.parse(response).message,"info");
             }
         });
     });
@@ -335,7 +335,7 @@
 
               document.getElementById("delete-modal-btn-close").click(); //simular modal close button press  
               ListEspecialidades();
-              alert(response,"info");
+              alert(JSON.parse(response).message,"info");
             }
         });
     });
