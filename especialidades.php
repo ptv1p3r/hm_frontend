@@ -285,7 +285,7 @@
             success: function(response) {
               console.log('response ::', response );
 
-              document.getElementById("add-modal-btn-close").click(); //simular modal close button press  
+              document.getElementById("add-modal-btn-close").click(); //simular click do butao fechar do modal
               ListEspecialidades();
               alert(JSON.parse(response).message,"info");
             }
@@ -309,7 +309,7 @@
             success: function(response) {
               console.log('response ::', response );
 
-              document.getElementById("update-modal-btn-close").click(); //simular modal close button press  
+              document.getElementById("update-modal-btn-close").click(); //simular click do butao fechar do modal 
               ListEspecialidades();
               alert(JSON.parse(response).message,"info");
             }
@@ -333,7 +333,7 @@
             success: function(response) {
               console.log('response ::', response );
 
-              document.getElementById("delete-modal-btn-close").click(); //simular modal close button press  
+              document.getElementById("delete-modal-btn-close").click(); //simular click do butao fechar do modal
               ListEspecialidades();
               alert(JSON.parse(response).message,"info");
             }
