@@ -291,7 +291,7 @@
               <div class="modal-body">
                 <input type="hidden" id="id" name="id" class="form-control">
                 <p id="delete_form_message"></p>
-                <p class="text-warning"><small>Depois de feito não pode voltar atráz.</small></p>
+                <p class="text-warning"><small>Depois de feito não pode voltar atrás.</small></p>
               </div>
               <div class="modal-footer">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -427,7 +427,7 @@ function ListMedicos(){
 
           var dataObject = [];
           for (var med of data.data) {
-            var temp = {id: "", Nome: "", Especialidade: "", Morada: "", CodPostal: "", Email: "", Nif: "", DataNascimento: "", Datecreate: "", Datemodify: ""};
+            var temp = {id: "", Nome: "", Especialidade: "", Morada: "", CodPostal: "", Email: "", Telemovel:"", Nif: "", CedProfissional: "", DataNascimento: ""/*, Datecreate: "", Datemodify: ""*/};
             
             temp.id = med.id;
             temp.Nome = med.nome;
@@ -435,10 +435,12 @@ function ListMedicos(){
             temp.Morada = med.morada;
             temp.CodPostal = med.codpost;
             temp.Email = med.email;
+            temp.Telemovel = med.telemovel;
             temp.Nif = med.nif;
+            temp.CedProfissional = med.ced_profissional;
             temp.DataNascimento = med.datanascimento;
-            temp.Datecreate = med.datecreate;
-            temp.Datemodify = med.datemodify;
+            /*temp.Datecreate = med.datecreate;
+            temp.Datemodify = med.datemodify;*/
 
             dataObject.push(temp);
           }
@@ -569,8 +571,8 @@ function DataToModal(data) {
   Form.elements["codpostal"].value = data[0].codpost;
   Form.elements["email"].value = data[0].email;
   Form.elements["nif"].value = data[0].nif;
-  /*Form.elements["phone"].value = data[0].telemovel;
-  Form.elements["cprofissional"].value = data[0].cprofissional;*/
+  Form.elements["phone"].value = data[0].telemovel;
+  Form.elements["cprofissional"].value = data[0].ced_profissional;
   Form.elements["datanascimento"].value = data[0].datanascimento;
   
   //Form.elements["idEspecialidade"].value = data[0].id_especialidade;

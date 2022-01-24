@@ -223,7 +223,7 @@
               <div class="modal-body">
                 <input type="hidden" id="id" name="id" class="form-control">
                 <p id="delete_form_message"></p>
-                <p class="text-warning"><small>Depois de feito não pode voltar atráz.</small></p>
+                <p class="text-warning"><small>Depois de feito não pode voltar atrás.</small></p>
               </div>
               <div class="modal-footer">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">

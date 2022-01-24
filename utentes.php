@@ -286,7 +286,7 @@
               <div class="modal-body">
                 <input type="hidden" id="id" name="id" class="form-control">
                 <p id="delete_form_message"></p>
-                <p class="text-warning"><small>Depois de feito não pode voltar atráz.</small></p>
+                <p class="text-warning"><small>Depois de feito não pode voltar atrás.</small></p>
               </div>
               <div class="modal-footer">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -418,17 +418,18 @@ function ListUtentes(){
 
           var dataObject = [];
           for (var utent of data.data) {
-            var temp = {id: "", Nome: "", Morada: "", CodPostal: "", Email: "", Nif: "", DataNascimento: "", Datecreate: "", Datemodify: ""};
+            var temp = {id: "", Nome: "", Morada: "", CodPostal: "", Email: "", Telemovel: "", Nif: "", DataNascimento: ""/*, Datecreate: "", Datemodify: ""*/};
             
             temp.id = utent.id;
             temp.Nome = utent.nome;
             temp.Morada = utent.morada;
             temp.CodPostal = utent.codpost;
             temp.Email = utent.email;
+            temp.Telemovel = utent.telemovel;
             temp.Nif = utent.nif;
             temp.DataNascimento = utent.datanascimento;
-            temp.Datecreate = utent.datecreate;
-            temp.Datemodify = utent.datemodify;
+            /*temp.Datecreate = utent.datecreate;
+            temp.Datemodify = utent.datemodify;*/
 
             dataObject.push(temp);
           }
@@ -509,9 +510,7 @@ function DataToModal(data) {
   Form.elements["email"].value = data[0].email;
   Form.elements["nif"].value = data[0].nif;
   Form.elements["nmr_utente"].value = data[0].nmr_utente;
-  /*
   Form.elements["phone"].value = data[0].telemovel;
-  */
   Form.elements["datanascimento"].value = data[0].datanascimento;
 };
 
